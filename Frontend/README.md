@@ -21,7 +21,7 @@ Esta es la interfaz de usuario de la aplicación **Movies Library**, una aplicac
 - **Lista de Favoritos:** Sección personal para gestionar películas preferidas pulsando el icono del ❤️.
 - **Perfil Personal:** Edición de datos (nombre, contraseña, foto de perfíl) y opción de eliminar la cuenta propia.
 
-###  Panel de Administración (`admin`)
+###  Panel de Administración
 - **Control de Catálogo (CRUD):** Creación, edición y eliminación completa de películas, o usuarios.
 - **Control de Usuarios:** Capacidad para supervisar la comunidad, editar datos de usuarios o eliminarlos de la plataforma.
 
