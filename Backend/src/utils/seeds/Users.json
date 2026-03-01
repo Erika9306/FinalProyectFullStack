@@ -1,0 +1,702 @@
+[
+  {
+    "id": "1",
+    "name": "María López",
+    "email": "marialopez@mail.com",
+    "password": "123456",
+    "role": "admin"
+  },
+  {
+    "id": "2",
+    "name": "John Smith",
+    "email": "johnsmith@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "3",
+    "name": "Ana García",
+    "email": "anagarcia@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "4",
+    "name": "Mohamed Ali",
+    "email": "mohamedali@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "5",
+    "name": "Liu Wei",
+    "email": "liuwei@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "6",
+    "name": "Sofia Rossi",
+    "email": "sofiarossi@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "7",
+    "name": "Carlos Martínez",
+    "email": "carlosmartinez@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "8",
+    "name": "Emma Johnson",
+    "email": "emmajohnson@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "9",
+    "name": "Isabella Silva",
+    "email": "isabellasilva@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "10",
+    "name": "Noah Brown",
+    "email": "noahbrown@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "11",
+    "name": "Olivia Williams",
+    "email": "oliviawilliams@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "12",
+    "name": "Mateo Fernández",
+    "email": "mateofernandez@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "13",
+    "name": "Lucas González",
+    "email": "lucasgonzalez@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "14",
+    "name": "Mia Hernández",
+    "email": "miahernandez@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "15",
+    "name": "Amir Khan",
+    "email": "amirkhan@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "16",
+    "name": "Ava Martin",
+    "email": "avamartin@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "17",
+    "name": "Hana Kim",
+    "email": "hanakim@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "18",
+    "name": "Ethan Davis",
+    "email": "ethandavis@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "19",
+    "name": "Camila Rodríguez",
+    "email": "camilarodriguez@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "20",
+    "name": "Lara Müller",
+    "email": "laramüller@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "21",
+    "name": "Daniela Costa",
+    "email": "danielacosta@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "22",
+    "name": "Oliver Taylor",
+    "email": "olivertaylor@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "23",
+    "name": "Hannah Lee",
+    "email": "hannahlee@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "24",
+    "name": "Sergio Sánchez",
+    "email": "sergiosanchez@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "25",
+    "name": "Charlotte Wilson",
+    "email": "charlottewilson@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "26",
+    "name": "Tomás Pereira",
+    "email": "tomaspereira@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "27",
+    "name": "Zoe Anderson",
+    "email": "zoeanderson@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "28",
+    "name": "Miguel Silva",
+    "email": "miguelsilva@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "29",
+    "name": "Nora Thomas",
+    "email": "norathomas@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "30",
+    "name": "Leonardo Moretti",
+    "email": "leonardomoretti@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "31",
+    "name": "Alice Walker",
+    "email": "alicewalker@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "32",
+    "name": "Mateusz Nowak",
+    "email": "mateusznowak@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "33",
+    "name": "Valentina Russo",
+    "email": "valentinarusso@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "34",
+    "name": "Yuki Tanaka",
+    "email": "yukitanaka@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "35",
+    "name": "Ibrahim Öz",
+    "email": "ibrahimöz@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "36",
+    "name": "Chloe Brown",
+    "email": "chloebrown@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "37",
+    "name": "Diego Oliveira",
+    "email": "diegooliveira@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "38",
+    "name": "Sara Novak",
+    "email": "saranovak@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "39",
+    "name": "Jasper de Vries",
+    "email": "jasperdevries@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "40",
+    "name": "Nina Petrova",
+    "email": "ninapetrova@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "41",
+    "name": "Samuel King",
+    "email": "samuelking@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "42",
+    "name": "Elena Petrova",
+    "email": "elenapetrova@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "43",
+    "name": "Aria Patel",
+    "email": "ariapatel@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "44",
+    "name": "Hugo Pereira",
+    "email": "hugopereira@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "45",
+    "name": "Marta Novak",
+    "email": "martanovak@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "46",
+    "name": "Oliver Müller",
+    "email": "olivermüller@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "47",
+    "name": "Priya Sharma",
+    "email": "priyasharma@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "48",
+    "name": "Mateo Ruiz",
+    "email": "mateoruiz@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "49",
+    "name": "Lina Gómez",
+    "email": "linagomez@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "50",
+    "name": "Felix Schmidt",
+    "email": "felixschmidt@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "51",
+    "name": "Camila Diaz",
+    "email": "camiladiaz@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "52",
+    "name": "Noémie Dubois",
+    "email": "noemiedubois@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "53",
+    "name": "Hector Morales",
+    "email": "hectormorales@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "54",
+    "name": "Julia Brown",
+    "email": "juliabrown@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "55",
+    "name": "Rafael Costa",
+    "email": "rafaelcosta@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "56",
+    "name": "Aisha Ahmed",
+    "email": "aishaahmed@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "57",
+    "name": "Oscar Duarte",
+    "email": "oscarduarte@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "58",
+    "name": "Maja Kowalska",
+    "email": "majakowalska@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "59",
+    "name": "Fernando Rojas",
+    "email": "fernandorojas@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "60",
+    "name": "Laura González",
+    "email": "lauragonzalez@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "61",
+    "name": "Ivan Ivanov",
+    "email": "ivanivanov@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "62",
+    "name": "Miriam Cohen",
+    "email": "miriamcohen@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "63",
+    "name": "Pedro Alves",
+    "email": "pedroalves@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "64",
+    "name": "Zara Khan",
+    "email": "zarakhan@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "65",
+    "name": "Andrés Castillo",
+    "email": "andrescastillo@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "66",
+    "name": "Greta Berg",
+    "email": "gretaberg@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "67",
+    "name": "Adriana Silva",
+    "email": "adrianasilva@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "68",
+    "name": "Victor Hugo",
+    "email": "victorhugo@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "69",
+    "name": "Lina Rossi",
+    "email": "linarossi@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "70",
+    "name": "Elias Haddad",
+    "email": "eliashaddad@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "71",
+    "name": "Bianca Moreau",
+    "email": "biancamoreau@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "72",
+    "name": "Jonas Hansen",
+    "email": "jonashansen@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "73",
+    "name": "Mariana Ortega",
+    "email": "marianaortega@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "74",
+    "name": "Ruben Alvarez",
+    "email": "rubenalvarez@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "75",
+    "name": "Yara Haddad",
+    "email": "yarahaddad@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "76",
+    "name": "Oscar Jiménez",
+    "email": "oscarjimenez@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "77",
+    "name": "Sofia Petrova",
+    "email": "sofiapetrova@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "78",
+    "name": "Luca Bianchi",
+    "email": "lucabianchi@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "79",
+    "name": "Alejandro Cruz",
+    "email": "alejandrocruz@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "80",
+    "name": "Mina Park",
+    "email": "minapark@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "81",
+    "name": "Evelyn Clark",
+    "email": "evelynclark@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "82",
+    "name": "Tobias Wagner",
+    "email": "tobiaswagner@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "83",
+    "name": "Youssef Ben",
+    "email": "youssefben@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "84",
+    "name": "Gabriela Nunes",
+    "email": "gabrielanunes@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "85",
+    "name": "Pablo Soto",
+    "email": "pablosoto@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "86",
+    "name": "Ingrid Olsen",
+    "email": "ingridolsen@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "87",
+    "name": "Rosa Díaz",
+    "email": "rosadiaz@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "88",
+    "name": "Marco Romano",
+    "email": "marcoromano@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "89",
+    "name": "Santiago Castro",
+    "email": "santiagocastro@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "90",
+    "name": "Elisa Romero",
+    "email": "elisaromero@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "91",
+    "name": "Matej Horvat",
+    "email": "matejhorvat@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "92",
+    "name": "Olga Kuznetsova",
+    "email": "olgakuznetsova@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "93",
+    "name": "Thiago Santos",
+    "email": "thiagosantos@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "94",
+    "name": "Isabel Romero",
+    "email": "isabelromero@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "95",
+    "name": "Amelia Torres",
+    "email": "ameliatorres@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "96",
+    "name": "Kenji Nakamura",
+    "email": "kenjinakamura@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "97",
+    "name": "Lucas Becker",
+    "email": "lucasbecker@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "98",
+    "name": "Fatima Rahman",
+    "email": "fatimarahman@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "99",
+    "name": "Elias Romero",
+    "email": "eliasromero@mail.com",
+    "password": "123456",
+    "role": "user"
+  },
+  {
+    "id": "100",
+    "name": "Chloe Dubois",
+    "email": "chloedubois@mail.com",
+    "password": "123456",
+    "role": "user"
+  }
+]

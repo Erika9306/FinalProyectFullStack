@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "title": "Ciencia Ficción",
+    "description": "Películas con elementos futuristas o tecnológicos."
+  },
+  {
+    "id": "2",
+    "title": "Acción",
+    "description": "Películas llenas de adrenalina y combates."
+  },
+  {
+    "id": "3",
+    "title": "Drama",
+    "description": "Historias emocionales y realistas."
+  },
+  {
+    "id": "4",
+    "title": "Comedia",
+    "description": "Películas para reír."
+  },
+  {
+    "id": "5",
+    "title": "Animación",
+    "description": "Películas animadas para todos los públicos."
+  },
+  {
+    "id": "6",
+    "title": "Terror",
+    "description": "Películas de miedo y suspenso."
+  },
+  {
+    "id": "7",
+    "title": "Aventura",
+    "description": "Películas de viajes y exploración."
+  },
+  {
+    "id": "8",
+    "title": "Romance",
+    "description": "Historias de amor."
+  }
+]
