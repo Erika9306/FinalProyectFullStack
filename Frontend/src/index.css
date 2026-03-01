@@ -1,0 +1,33 @@
+:root{
+    --primary-color: #3d3d3d;           
+    --secondary-color: #bbbbbb;          
+    --main-color: #ff0202;              
+    --text-color: #333333; 
+    --background-color-user: #050505;    
+    --background-color-admin: #dfdfdfe8;
+    --font-style: "Book Antiqua", serif;
+    --box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); 
+    --box-shadow-user: 0 8px 20px rgba(219, 219, 219, 0.3);   
+    --button--primary: #0393a7;        
+    --button--secondary: #76c018;      
+    --button--danger: #f33a19;         
+    --errors-div: #ffff47;                
+}
+
+body, html {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;  
+  background-color: var(--background-color-admin); 
+  font-family: var(--font-style);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-style);
+  
+}
+

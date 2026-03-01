@@ -1,0 +1,46 @@
+ .navbar{
+    width: 100%;
+    background-color: var(--background-color-admin) !important;
+    display: flex;
+    position:sticky;
+    top:0;
+    justify-content: center;
+    align-items: center;
+    padding: .05rem;
+    margin:0;
+    }
+    
+   
+ nav{
+      width:100%;     
+    background-color: transparent !important;
+      color:var(--text-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+ }
+
+ul{
+   
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin-left: auto;
+    margin-right: 1rem;
+}
+h2{
+    color: var(--text-color);
+    font-size: 1.5rem;
+   
+}
+
+li a{
+    text-decoration: none;     
+    font-size: 1rem;
+}
+
+@media( max-width: 480px){
+  h2{
+    display: none;
+  }
+}

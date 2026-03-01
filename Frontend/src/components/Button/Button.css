@@ -1,0 +1,32 @@
+.button-primary{
+    background-color: var(--button--primary) !important;
+    color: white;
+    border: none;
+    margin-right: 0.3rem;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;   
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-secondary{
+    background-color: var(--button--secondary) !important;
+    color: white;
+    border: none;
+    margin-right: 0.3rem;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;   
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}   
+  
+.button-danger{
+    background-color: var(--button--danger) !important;
+    color: white;
+    border: none;
+    margin-right: 0.3rem;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;   
+    cursor: pointer;
+    
+}

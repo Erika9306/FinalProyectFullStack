@@ -1,0 +1,186 @@
+h2{
+  font-size: 1.5rem;
+  color: var(--text-color);
+  margin-bottom: 1.7rem;
+}
+h3{
+  font-size: 1.2rem;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+  margin-left: 0.2rem;
+}
+
+
+/* El Buscador */
+.search-movie {
+  position: relative;
+  width: 60%;
+  margin-bottom: 2rem;
+}
+
+.search-movie-input { 
+  background-color: white ; 
+  padding: 0.5rem ; 
+  border-radius: 12px ;
+  margin-bottom: 1rem ;
+  margin-left: 0.2rem ;
+  width: 60% ;
+  color: var(--text-color) ;
+  border: 1px solid var(--secondary-color) ;
+}
+.search-movie-input:focus{
+  outline: none;
+
+}
+
+/*resultado busuqeda mmovies*/
+.search-result-div {
+  position: absolute;
+  top: 100%; 
+  left:0;
+  width: 60%;
+  align-items: center;
+  justify-content:space-between;
+  gap:1rem;
+  background-color: var(--background-color-admin);
+  border-radius: 12px;       
+  margin-top: 1rem;  
+  z-index: 100;
+}
+
+
+.search-item-row {
+ display: flex;
+  align-items: center;
+  justify-content:space-between;
+  color: var(--text-color);
+  
+}
+.search-item-row button{
+  display: flex;
+  background-color: transparent;
+ align-items: center;
+ justify-content: center;
+ 
+}
+
+.search-item-row img {
+  width:50px;
+  height: 60px;
+  object-fit: cover;
+}
+
+/*formularios de crear y editar*/
+.create-movie-form,
+.edit-movie-form {
+  position: fixed !important;
+  top: 20%;
+  left: 20%;  
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  background: var(--background-color-admin);
+  padding: 2rem;
+  gap: 0.5rem;
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+}
+.create-movie-form input,
+.create-movie-form select,
+.edit-movie-form input,
+.edit-movie-form select  {
+  padding: 0.5rem;
+  border: 1px solid var(--secondary-color);
+  border-radius: 12px;
+  margin-bottom: 0.3rem;
+  color: var(--text-color);  
+}
+.create-movie-form input,
+.create-movie-form select,
+.edit-movie-form input,
+.edit-movie-form select:focus{
+  outline: none;
+}
+
+.add-movie-button { 
+  margin-bottom: 1.5rem;  
+  justify-content: center;
+  align-items: center;
+  width: 15%;
+  border: none;
+  margin-top: 0.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+}
+
+/*Movies tabla general*/
+.movie-table {
+  width: 100%; 
+  background-color: var(--background-color-admin) !important;
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+  margin-top: 1rem;
+  margin-left: 0.2rem;
+} 
+
+table {
+   width: 100%;
+  border-collapse: collapse;  
+  color: var(--text-color);
+}
+thead {
+  width: 100%; 
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #edf2f7;
+}
+th {
+  text-align: left;
+  padding: 1rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;  
+  color: var(--text-color);
+  justify-content: space-evenly;
+}
+/* Cuerpo de la tabla (Tbody) */
+td {
+  padding: 16px;
+  border-bottom: 1px solid #edf2f7;
+  font-size: 0.95rem;  
+  color: var(--text-color);
+}
+
+
+tbody tr:hover {
+  background-color: var(--secondary-color) !important;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .search-movie
+   {
+    width: 90%;
+  }
+  .search-result-div{
+     position: relative !important;
+    top:0 !important;      
+    padding: 0.5rem 1rem;
+    margin-bottom: 2rem;
+    background-color: var(--background-color-admin);
+  }
+  
+  .add-movie-button{
+    width: 60%;
+    margin-top:2rem;
+  }
+  .create-movie-form,
+  .edit-movie-form {
+    width: 90%;
+    top: 10%;
+    left: 5%;
+    
+  }
+}
