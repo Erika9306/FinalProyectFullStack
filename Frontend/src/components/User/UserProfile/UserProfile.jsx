@@ -145,7 +145,7 @@ export const UserProfile = () => {
                             onClick={() => {
                                 setEditAccount(false);
                                  reset({
-                                    username: user.name,
+                                    name: user.name,
                                     img: user.img,
                                     password: ""
                                  });
