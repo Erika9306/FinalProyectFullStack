@@ -10,6 +10,11 @@ h3{
   margin-bottom: 1.5rem;
   margin-left: 0.2rem;
 }
+label {
+  color: var(--text-color); 
+  display: block; 
+  margin-bottom: 0.5rem;
+}
 
 /*el buscador de user*/
 .search-user {
