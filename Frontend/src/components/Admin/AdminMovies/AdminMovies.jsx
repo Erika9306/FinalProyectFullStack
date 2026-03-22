@@ -348,21 +348,25 @@ const search = useMemo(()=>{
      <h3>✏️ Editar Película</h3> 
     <input 
       type='text'
+      placeholder='Título'
       value={editMovie.title}
       onChange={e => setEditMovie({...editMovie, title: e.target.value})} 
     />
     <input
       type='text'
+      placeholder='Sinopsis'
       value={editMovie.sinopsis}
       onChange={e => setEditMovie({...editMovie, sinopsis: e.target.value})} 
     />
     <input 
       type="text"
+      placeholder="Año del lanzamiento"
       value = {editMovie.year}
       onChange ={ e=> setEditMovie({...editMovie, year: e.target.value})}  
     />
     <input 
       type="text"
+      placeholder="Director"
       value = {editMovie.director}
       onChange ={ e=> setEditMovie({...editMovie, director: e.target.value})}  
     />

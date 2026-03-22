@@ -129,8 +129,8 @@ export const UserProfile = () => {
             ) : (
                 <form onSubmit={handleSubmit(handleEdit)} className='edit-personal-info'>
                     <h3>Editar Datos</h3>
-                    <input {...register ('name', {required: true, maxLength: 50})}/>
-                    <input{...register('img')}/>
+                    <input {...register ('name', {required: true, maxLength: 50})} placeholder='Nombre Completo'/>
+                    <input{...register('img')} placeholder='Imagen deseada'/>
                     <input{...register('password')} placeholder=" Déjelo en blanco si no desee cambiar "/>
                     <div>
                         <Button 
