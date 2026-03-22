@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./AdminHome.css";
 
 export default function AdminHome() {
+  const URL = "https://finalproyectfullstack.onrender.com";
   const [users, setUsers] = useState([]);
   const [movies, setMovies] = useState([]);
  
@@ -17,11 +18,11 @@ export default function AdminHome() {
 
       try {
         const [userRes, movieRes] = await Promise.all([
-          fetch("http://localhost:3000/api/v1/user", {
+          fetch(`${URL}/api/v1/user`, {
             method: "GET",
             headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
           }),
-          fetch("http://localhost:3000/api/v1/movies", {
+          fetch(`${URL}/api/v1/movies`, {
             method:"GET",
             headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
           }),

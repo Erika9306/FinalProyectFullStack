@@ -7,6 +7,7 @@ import{ Button } from '../../Button/Button';
 
 //usamos React.memo para memorizar el componente y evitar renders innecesarios
 export const AdminUsers = React.memo(() => {
+  const URL = "https://finalproyectfullstack.onrender.com";
   const [users, setUsers] = useState([]);
   const [addUserForm, setAddUserForm] = useState (false);
   const [editUserForm, setEditUserForm]= useState(false);
@@ -17,7 +18,7 @@ export const AdminUsers = React.memo(() => {
   
   useEffect(() => {
     const listUsers = async () => {
-      const res = await fetch("http://localhost:3000/api/v1/user", {
+      const res = await fetch(`${URL}/api/v1/user`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -42,7 +43,7 @@ export const AdminUsers = React.memo(() => {
   //CREAR USUARIO
   const createUser = useCallback(async (data) =>{
     try{
-      const response = await fetch("http://localhost:3000/api/v1/user/register", {
+      const response = await fetch(`${URL}/api/v1/user/register`, {
         method: "POST",
         headers:{
           "Authorization": `Bearer ${localStorage.getItem('token')}`,
@@ -86,7 +87,7 @@ export const AdminUsers = React.memo(() => {
     e.preventDefault();
     if(!editUser) return;
     try{
-      const response = await fetch(`http://localhost:3000/api/v1/user/${editUser._id}`,{
+      const response = await fetch(`${URL}/api/v1/user/${editUser._id}`,{
         method: "PUT",
         headers:{
           "Authorization": `Bearer ${localStorage.getItem('token')}`,
@@ -127,7 +128,7 @@ export const AdminUsers = React.memo(() => {
     });
     
     if (!result.isConfirmed) return;
-    const response =  await fetch(`http://localhost:3000/api/v1/user/${user._id}`,{
+    const response =  await fetch(`${URL}/api/v1/user/${user._id}`,{
        method: "DELETE",
        headers:{
         "Authorization": `Bearer ${localStorage.getItem('token')}`, 
@@ -153,7 +154,7 @@ if(response.ok){
   // DETALLE
 
   const detailsUser = useCallback(async(user) => {   
-    const response = await fetch(`http://localhost:3000/api/v1/list/favourites/${user._id}`,{
+    const response = await fetch(`${URL}/api/v1/list/favourites/${user._id}`,{
       method: "GET",
       headers:{
         "Authorization": `Bearer ${localStorage.getItem('token')}`,

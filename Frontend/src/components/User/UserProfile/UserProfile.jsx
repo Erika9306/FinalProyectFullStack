@@ -7,7 +7,7 @@ import {Button} from '../../Button/Button'
 import "./UserProfile.css";
 
 export const UserProfile = () => {
-
+    const URL = "https://finalproyectfullstack.onrender.com";
     const [user, setUser] = useState(null);
     const [editAccount, setEditAccount]= useState(false);    
     const {register, handleSubmit, setValue, reset} = useForm();    
@@ -20,7 +20,7 @@ export const UserProfile = () => {
         const userInfo = async () => {
             try {
                 
-                const response = await fetch(`http://localhost:3000/api/v1/user/${userId}`, {
+                const response = await fetch(`${URL}/api/v1/user/${userId}`, {
                     method: "GET",
                     headers: {
                         "Authorization": `Bearer ${token}` 
@@ -50,7 +50,7 @@ export const UserProfile = () => {
             delete userData.password;
             }
         try {
-            const response = await fetch(`http://localhost:3000/api/v1/user/${userId}`, {
+            const response = await fetch(`${URL}/api/v1/user/${userId}`, {
                 method: "PUT",
                 headers: {
                     "Authorization": `Bearer ${token}`,
@@ -89,7 +89,7 @@ export const UserProfile = () => {
 
         if (result.isConfirmed) {
             try {
-                const response = await fetch(`http://localhost:3000/api/v1/user/${userId}`, {
+                const response = await fetch(`${URL}/api/v1/user/${userId}`, {
                     method: "DELETE",
                     headers: {
                         "Authorization": `Bearer ${token}` 

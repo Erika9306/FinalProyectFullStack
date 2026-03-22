@@ -7,6 +7,7 @@ import './MovieDetail.css'
 
 
 export default function MovieDetail() { 
+  const URL = "https://finalproyectfullstack.onrender.com";
   const [movie, setMovie] = useState(null);
   const [selected, setSelected] = useState(false);
 
@@ -16,7 +17,7 @@ export default function MovieDetail() {
 
   useEffect(() => {
     const movieSelected = async()=>{
-      const response = await fetch(`http://localhost:3000/api/v1/movies/${id}`, {
+      const response = await fetch(`${URL}/api/v1/movies/${id}`, {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${localStorage.getItem('token')}`,
@@ -36,7 +37,7 @@ export default function MovieDetail() {
 
   //sacamos usuario decodificando token y alli aparece _id
   const userId = jwtDecode(token)._id;
-  const response = await fetch(`http://localhost:3000/api/v1/list/add/${id}`,{
+  const response = await fetch(`${URL}/api/v1/list/add/${id}`,{
     method: "POST",
       headers:{
         "Authorization": `Bearer ${token}`,

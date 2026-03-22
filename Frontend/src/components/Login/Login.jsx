@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import "./Login.css";
 
 export default function Login({setRole, setToken}) {
+  const URL = "https://finalproyectfullstack.onrender.com";
   const navigate = useNavigate();
   const {
     register,    
@@ -19,7 +20,7 @@ export default function Login({setRole, setToken}) {
     try {
 
       //mandamos petición al backend mandando la info de usuario
-      const response = await fetch("http://localhost:3000/api/v1/user/login", {
+      const response = await fetch(`${URL}/api/v1/user/login`, {
         method: "POST",
         headers: { 
           "Content-Type": "application/json" 

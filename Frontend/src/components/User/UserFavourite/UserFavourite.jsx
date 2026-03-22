@@ -3,7 +3,8 @@ import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
 import "./UserFavourite.css";
 
-export const UserFavourite = () => {    
+export const UserFavourite = () => {   
+    const URL = "https://finalproyectfullstack.onrender.com"; 
     const token = localStorage.getItem('token');
 
     //sacamos usuario decodificando token y alli aparece _id
@@ -17,7 +18,7 @@ export const UserFavourite = () => {
         const savedMovie =async()=>{
             setLoading(true);
             try{
-            const response = await fetch(`http://localhost:3000/api/v1/list/favourites/${userId}`,{
+            const response = await fetch(`${URL}/api/v1/list/favourites/${userId}`,{
                 method: "GET",
                 headers:{
                     "Authorization": `Bearer ${token}`,

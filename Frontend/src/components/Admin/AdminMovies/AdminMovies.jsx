@@ -7,6 +7,7 @@ import { Button } from '../../../components/Button/Button';
 
 //usamos React.memo para memorizar el componente y evitar renders innecesarios
 export const AdminMovies = React.memo(() => {
+  const URL = "https://finalproyectfullstack.onrender.com";
   const [movies, setMovies] = useState([]);
   const [addMoviesForm, setAddMoviesForm] = useState(false);
   const [editMovieForm, setEditMovieForm] = useState(false);
@@ -20,7 +21,7 @@ export const AdminMovies = React.memo(() => {
   useEffect(() => {
     const listMovies = async () => {
       try{
-      const res = await fetch("http://localhost:3000/api/v1/movies", {
+      const res = await fetch(`${URL}/api/v1/movies`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -42,7 +43,7 @@ export const AdminMovies = React.memo(() => {
 useEffect(()=>{
   const categoriesList = async ()=>{
     try{
-    const result = await fetch('http://localhost:3000/api/v1/categories', {
+    const result = await fetch(`${URL}/api/v1/categories`, {
       method: "GET",
       headers:{
         "Authorization" : `Bearer ${localStorage.getItem('token')}`,
@@ -66,7 +67,7 @@ categoriesList();
 
  const createMovie = useCallback(async (data)=>{
   try{
-  const response = await fetch('http://localhost:3000/api/v1/movies', {
+  const response = await fetch(`${URL}/api/v1/movies`, {
     method: "POST",
         headers:{
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -114,7 +115,7 @@ const retrieveMovieInfo = useCallback((movie) =>{
     }
 
     try{
-      const response = await fetch(`http://localhost:3000/api/v1/movies/${editMovie._id}`, {
+      const response = await fetch(`${URL}/api/v1/movies/${editMovie._id}`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -181,7 +182,7 @@ const result = await Swal.fire({
     if(!result.isConfirmed){
       return;
     }
-  const response = await fetch(`http://localhost:3000/api/v1/movies/${movie._id}`,{
+  const response = await fetch(`${URL}/api/v1/movies/${movie._id}`,{
     method:"DELETE",
     headers:{
       "Authorization": `Bearer ${localStorage.getItem('token')}`,

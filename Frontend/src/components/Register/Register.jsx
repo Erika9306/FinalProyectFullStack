@@ -5,13 +5,14 @@ import { useForm } from "react-hook-form";
 import "./Register.css";
 
 export default function Register() {
+  const URL = "https://finalproyectfullstack.onrender.com";
   const navigate = useNavigate();
   //React Form Hook
   const {register,handleSubmit,formState :{errors}} = useForm();
 
   const onRegister = async (data)=>{
     try {
-      const response = await fetch("http://localhost:3000/api/v1/user/register", {
+      const response = await fetch(`${URL}/api/v1/user/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

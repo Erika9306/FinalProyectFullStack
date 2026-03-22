@@ -4,7 +4,7 @@ import "./UserHome.css";
 import {Button} from '../../Button/Button'
 
 export default function UserHome(){
-
+  const URL = "https://finalproyectfullstack.onrender.com";
   const [movies, setMovies] = useState([]); 
   const[searchMovie, setSearchMovie] = useState('');
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ export default function UserHome(){
       }
 
       try {
-        const res = await fetch("http://localhost:3000/api/v1/movies", {
+        const res = await fetch(`${URL}/api/v1/movies`, {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${token}`,
