@@ -24,8 +24,8 @@ El ecosistema se divide en dos grandes bloques que trabajan de forma paralela:
 
 ##  Cómo poner en marcha el proyecto
 Para que el ecosistema funcione, debes arrancar ambos servicios por separado abriendo dos terminales:
-1. **Servidor (Backend):** El backend debe estar activo para que el frontend pueda consultar los datos y autenticar usuarios.
-2. **Interfaz (Frontend)**: Una vez el backend esté corriendo (puerto 3000), arranca la interfaz.
+1. **Servidor (Backend):** El backend debe estar activo para que el frontend pueda consultar los datos y autenticar usuarios. link :https://finalproyectfullstack.onrender.com
+2. **Interfaz (Frontend)**: Una vez el backend esté corriendo (puerto 3000), arranca la interfaz.link: final-proyect-full-stack-6553wppq0-erika9306s-projects.vercel.app
 
 ---
 

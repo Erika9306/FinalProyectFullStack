@@ -1,6 +1,6 @@
 const User = require('../models/User');
 const fileDelete = require('../../utils/deleteFileCloudinary.js');
-
+const {generateToken} = require('../../utils/jwt');
 //CRUD usuarios
 
 const getUser = async (req, res,next)=>{
@@ -31,12 +31,14 @@ const postUser = async (req, res,next) => {
             email: req.body.email,
             password: req.body.password,
             role: req.body.role,  
-            img: req.body.img,          
+            //foto por defecto, luego en su perfil puede cambiarla
+            img: 'https://us.123rf.com/450wm/get4net/get4net1902/get4net190209043/125446708-anonymous-faceless-user.jpg',          
             movies: req.body.movies            
         });
                 
         const createdUser = await newUser.save();
-        return res.status(201).json(createdUser);
+        const token = generateToken(createdUser);        
+        return res.status(201).json({ message: 'Created! passing through auto-login', token });
 
     }catch(err){
        return next(err);

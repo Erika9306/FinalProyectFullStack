@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
+
 import "./Register.css";
 
 export default function Register() {
@@ -17,7 +18,6 @@ export default function Register() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-
       const result = await response.json();
       console.log("Respuesta de registro:", result);
 
@@ -25,8 +25,11 @@ export default function Register() {
         console.log("error al registrarse", result);
         return;
       }
-      // Redirigir al login después del registro
-      navigate("/login");
+      if(response.ok){
+        localStorage.setItem("token",result.token);           
+      }
+      // auto-login, redirigir a home después de registrarse
+      navigate("/user/home");
     } catch (error) {
       console.error("erroar al registrarse:", error);
     }
