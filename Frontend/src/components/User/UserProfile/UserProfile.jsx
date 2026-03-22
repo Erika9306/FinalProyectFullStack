@@ -144,7 +144,11 @@ export const UserProfile = () => {
                             className='button-danger'
                             onClick={() => {
                                 setEditAccount(false);
-                                 reset();
+                                 reset({
+                                    username: user.username,
+                                    img: user.img,
+                                    password: ""
+                                 });
                             }}
                         />
                     </div>

@@ -275,8 +275,7 @@ const search = useMemo(()=>{
             placeholder="Título"
             {...register ('title', {required: true, maxLength: 100})}
            />
-          <input 
-            type="text"
+          <textarea
             placeholder="Sinopsis"
             {...register('sinopsis', {required:true, maxLength:500})}
           />
@@ -338,7 +337,16 @@ const search = useMemo(()=>{
         type="button"
         onClick ={() => {
           setAddMoviesForm(false);
-          reset();
+          reset({
+            title: "",
+            sinopsis: "",
+            director: "",
+            year: "",
+            category: "",
+            imgUrl: "",
+            videoUrl: "",
+            available: ""
+          });
         }}
         className={"button-danger"}
         />
@@ -355,8 +363,7 @@ const search = useMemo(()=>{
       value={editMovie.title}
       onChange={e => setEditMovie({...editMovie, title: e.target.value})} 
     />
-    <input
-      type='text'
+    <textarea
       placeholder='Sinopsis'
       value={editMovie.sinopsis}
       onChange={e => setEditMovie({...editMovie, sinopsis: e.target.value})} 
@@ -420,7 +427,16 @@ const search = useMemo(()=>{
         type="button"
         onClick={() => {
           setEditMovieForm(false);
-        reset();
+        reset({
+            title: movies.title,
+            sinopsis: movies.sinopsis,
+            director: movies.director,
+            year: movies.year,
+            category: movies.category._id,
+            imgUrl: movies.imgUrl,
+            videoUrl: movies.videoUrl,
+            available: movies.available
+          });
         }}
         className={"button-danger"}
       />
