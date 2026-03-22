@@ -1,4 +1,4 @@
-import React, { useMemo,useCallback, useEffect, useState } from 'react';
+import React, { useMemo,useCallback, useEffect, useState, use } from 'react';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import "./AdminMovies.css";
@@ -61,6 +61,7 @@ useEffect(()=>{
     };
 categoriesList();
 },[]);
+
 
  //CREAR PELÍCULA
 // usamos useCallback para memorizar la función y así se renderiza una sola vez
@@ -336,17 +337,7 @@ const search = useMemo(()=>{
         text={"Cancelar"}
         type="button"
         onClick ={() => {
-          setAddMoviesForm(false);
-          reset({
-            title: "",
-            sinopsis: "",
-            director: "",
-            year: "",
-            category: "",
-            imgUrl: "",
-            videoUrl: "",
-            available: ""
-          });
+          setAddMoviesForm(false);          
         }}
         className={"button-danger"}
         />
@@ -427,16 +418,7 @@ const search = useMemo(()=>{
         type="button"
         onClick={() => {
           setEditMovieForm(false);
-        reset({
-            title: movies.title,
-            sinopsis: movies.sinopsis,
-            director: movies.director,
-            year: movies.year,
-            category: movies.category._id,
-            imgUrl: movies.imgUrl,
-            videoUrl: movies.videoUrl,
-            available: movies.available
-          });
+        reset();
         }}
         className={"button-danger"}
       />

@@ -16,7 +16,7 @@ export const UserProfile = () => {
     const userId = jwtDecode(token)._id;
 
     useEffect(()=>{
-
+     
         const userInfo = async () => {
             try {
                 
@@ -42,6 +42,9 @@ export const UserProfile = () => {
             userInfo();
         }, [userId, token, setValue]);   
         
+
+        //cada vez que el usuario cambie, se actualizan los campos del formulario con los datos actuales del usuario
+      
        //  ACTUALIZAR PERFIL
     const handleEdit = useCallback(async (userData) => {      
         if(!userData.password){
@@ -143,12 +146,12 @@ export const UserProfile = () => {
                             text={"Cancelar"} 
                             className='button-danger'
                             onClick={() => {
-                                setEditAccount(false);
-                                 reset({
+                                reset({
                                     name: user.name,
                                     img: user.img,
                                     password: ""
-                                 });
+                                });
+                                setEditAccount(false);                         
                             }}
                         />
                     </div>

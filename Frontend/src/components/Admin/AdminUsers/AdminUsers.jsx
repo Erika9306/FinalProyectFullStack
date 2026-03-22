@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect,  useMemo,  useState } from 'react';
+import React, { use, useCallback, useEffect,  useMemo,  useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import "./AdminUsers.css";
@@ -38,8 +38,6 @@ export const AdminUsers = React.memo(() => {
     reset,
     formState:{ errors }} = useForm();
 
-
-  
   //CREAR USUARIO
   const createUser = useCallback(async (data) =>{
     try{
@@ -349,11 +347,7 @@ const search = useMemo(()=>{
         onClick ={(e) =>{ 
             e.preventDefault();
             setEditUserForm(false);
-            reset({
-                name: editUser.name,
-                email: editUser.email,
-                role: editUser.role
-            });
+            
           }}
         className={'button-danger'}
       />
