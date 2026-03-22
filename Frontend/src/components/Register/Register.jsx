@@ -1,11 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
-
+import {jwtDecode} from "jwt-decode";
 import "./Register.css";
 
-export default function Register() {
+export default function Register({setToken, setRole}) {
   const URL = "https://finalproyectfullstack.onrender.com";
   const navigate = useNavigate();
   //React Form Hook
@@ -28,8 +27,18 @@ export default function Register() {
       if(response.ok){
         localStorage.setItem("token",result.token);           
       }
-      // auto-login, redirigir a home después de registrarse
-      navigate("/user/home");
+      const decoded = jwtDecode(result.token);
+
+      // Guardar token en localStorage
+      localStorage.setItem("token", result.token);
+      localStorage.setItem("role", decoded.role);
+      localStorage.setItem("userId", decoded._id);
+      setToken(result.token);
+      setRole(decoded.role);          
+
+      // Redirigir según el rol
+    navigate(decoded.role === "admin" ? "/admin/home" : "/user/home");
+
     } catch (error) {
       console.error("erroar al registrarse:", error);
     }
