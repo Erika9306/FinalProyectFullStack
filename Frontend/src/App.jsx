@@ -49,7 +49,16 @@ function App() {
 
 
       {/* Registro */}
-      <Route path="/register" element={<Register />} />
+      <Route path="/register" element={
+        token && isTokenValid(token) ? (
+          // Si el token existe y es válido, redirigimos según el rol haciendo auto-login
+          <Navigate to={role === "admin" ? "/admin/home" : "/user/home"} replace />
+        ) : (
+          // Si NO hay token o está caducado, mostramos el formulario de Registro
+          <Register setToken={setToken} setRole={setRole} />
+        )
+
+      } />
 
       {/* Usuario */}
       <Route
