@@ -306,16 +306,19 @@ const search = useMemo(()=>{
 {editUserForm && editUser && (
   <form onSubmit={handleEdit} className='edit-user-form'>
     <h3>✏️ Editar Usuario</h3> 
+    <label>Nombre:</label>
     <input 
       type='text'
       value={editUser.name}
       onChange={e => setEditUser({...editUser, name: e.target.value})} 
     />
+    <label>Email:</label>
     <input
       type='email'
       value={editUser.email}
       onChange={e => setEditUser({...editUser, email: e.target.value})} 
     />
+    <label>Rol:</label>
     <select   
       value={editUser.role}
       onChange={e => setEditUser({...editUser, role: e.target.value})}
