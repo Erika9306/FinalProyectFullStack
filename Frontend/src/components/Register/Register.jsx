@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import {jwtDecode} from "jwt-decode";
 import "./Register.css";
+import { set } from "mongoose";
 
 export default function Register({setToken, setRole}) {
   const URL = "https://finalproyectfullstack.onrender.com";
@@ -36,8 +37,10 @@ export default function Register({setToken, setRole}) {
       setToken(result.token);
       setRole(decoded.role);          
 
-      // Redirigir según el rol
-    navigate(decoded.role === "admin" ? "/admin/home" : "/user/home");
+      // Redirigir según el rol con peuqe;ño delay para asegurar que el token se guarde antes de redirigir
+      setTimeout(() => {
+        navigate(decoded.role === "admin" ? "/admin/home" : "/user/home");
+      }, 200);
 
     } catch (error) {
       console.error("erroar al registrarse:", error);
