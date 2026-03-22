@@ -299,7 +299,12 @@ const search = useMemo(()=>{
           onClick ={(e) =>{ 
             e.preventDefault();
             setAddUserForm(false);
-            reset();
+            reset({
+                name: "",
+                email: "",
+                password: "",
+                role: "user"
+            });
           }}
           className={'button-danger cancel-btn'}
           />
@@ -344,7 +349,11 @@ const search = useMemo(()=>{
         onClick ={(e) =>{ 
             e.preventDefault();
             setEditUserForm(false);
-            reset();
+            reset({
+                name: editUser.name,
+                email: editUser.email,
+                role: editUser.role
+            });
           }}
         className={'button-danger'}
       />
