@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import {jwtDecode} from "jwt-decode";
 import "./Register.css";
-import { set } from "mongoose";
+
 
 export default function Register({setToken, setRole}) {
   const URL = "https://finalproyectfullstack.onrender.com";
