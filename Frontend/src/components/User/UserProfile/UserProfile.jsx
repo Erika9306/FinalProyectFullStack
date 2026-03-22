@@ -142,7 +142,10 @@ export const UserProfile = () => {
                             type="button" 
                             text={"Cancelar"} 
                             className='button-danger'
-                            onClick={() => setEditAccount(false)} 
+                            onClick={() => {
+                                setEditAccount(false);
+                                 reset();
+                            }}
                         />
                     </div>
                 </form>

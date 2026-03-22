@@ -336,7 +336,10 @@ const search = useMemo(()=>{
         <Button
         text={"Cancelar"}
         type="button"
-        onClick ={() => setAddMoviesForm(false)}
+        onClick ={() => {
+          setAddMoviesForm(false);
+          reset();
+        }}
         className={"button-danger"}
         />
         </div>
@@ -415,7 +418,10 @@ const search = useMemo(()=>{
       <Button
         text={"Cancelar"}
         type="button"
-        onClick={() => setEditMovieForm(false)}
+        onClick={() => {
+          setEditMovieForm(false);
+        reset();
+        }}
         className={"button-danger"}
       />
     </div>
