@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
 import {Button} from '../../Button/Button'
 import "./UserProfile.css";
 
@@ -145,13 +145,11 @@ export const UserProfile = () => {
                             type="button" 
                             text={"Cancelar"} 
                             className='button-danger'
-                            onClick={() => {
-                                reset({
-                                    name: user.name,
-                                    img: user.img,
-                                    password: ""
-                                });
-                                setEditAccount(false);                         
+                            onClick={() => {                              
+                                setEditAccount(false);
+                                setValue('name', user.name);
+                                setValue('img', user.img);
+                                setValue('password', '');                                                     
                             }}
                         />
                     </div>
