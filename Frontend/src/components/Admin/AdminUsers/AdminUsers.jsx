@@ -296,7 +296,10 @@ const search = useMemo(()=>{
         <Button 
         text={'Cancelar'}
           type='button'
-          onClick ={() => setAddUserForm(false)}
+          onClick ={(e) =>{ 
+            e.preventDefault();
+            setAddUserForm(false);
+          }}
           className={'button-danger cancel-btn'}
           />
         </div>
