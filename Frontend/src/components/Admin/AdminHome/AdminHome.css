@@ -13,8 +13,8 @@
 }
 
 .info-users-card,
- .info-movies-card,
-  .info-admins-card {
+.info-movies-card,
+.info-admins-card {
   width: 98%;
   background: var(--background-color-admin);
   padding: 1.2rem;
@@ -28,33 +28,32 @@
 }
 
 .info-users-icon,
- .info-movies-icon,
-  .info-admins-icon {
+.info-movies-icon,
+.info-admins-icon {
   font-size: 2.5rem;
   margin-right: 1rem;
 }
 
 .info-users-details h3,
- .info-movies-details h3, 
- .info-admins-details h3 { 
- 
+.info-movies-details h3, 
+.info-admins-details h3 { 
   color: var(--text-color);
   font-size: 1.5rem;
-   }
+}
 .info-users-details p,
- .info-movies-details p, 
- .info-admins-details p {
+.info-movies-details p, 
+.info-admins-details p {
 
-   font-size: 1.2rem; 
-   font-weight: bold;
-    color: var(--text-color); 
+  font-size: 1.2rem; 
+  font-weight: bold;
+  color: var(--text-color); 
   }
 
-  h1{
-    margin-top: 2.5rem;
-    color: var(--text-color);
-    font-size: 2rem;
-     margin-bottom: 1.5rem;
+h1{
+  margin-top: 2.5rem;
+  color: var(--text-color);
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
   }
 
 @media (max-width: 480px) {
