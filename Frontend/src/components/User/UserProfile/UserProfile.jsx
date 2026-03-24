@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
-import { set, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import {Button} from '../../Button/Button'
 import "./UserProfile.css";
 

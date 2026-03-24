@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./AdminHome.css";
 
 export default function AdminHome() {
@@ -58,7 +59,7 @@ export default function AdminHome() {
         <div className="info-users-card">
           <div className="info-users-icon">👤</div>
           <div className="info-users-details">
-            <h3>Usuarios</h3>
+           <Link to="/admin/users"><h3>Usuarios</h3></Link>
             <p>{users.length}</p>
           </div>
         </div>
@@ -66,7 +67,7 @@ export default function AdminHome() {
         <div className="info-movies-card">
           <div className="info-movies-icon">🎬</div>
           <div className="info-movies-details">
-            <h3>Películas</h3>
+            <Link to="/admin/movies"><h3>Películas</h3></Link>
             <p>{movies.length}</p>
           </div>
         </div>
@@ -75,7 +76,9 @@ export default function AdminHome() {
         <div className="info-admins-card">
           <div className="info-admins-icon">🛡️</div>
           <div className="info-admins-details">
-            <h3>Administradores</h3>
+            <Link to="/admin/admins">
+              <h3>Administradores</h3>
+            </Link>
             <p>{users.filter(u => u.role === 'admin').length}</p>
           </div>
         </div>

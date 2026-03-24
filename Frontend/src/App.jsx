@@ -5,6 +5,7 @@ import Register from "./components/Register/Register.jsx";
 import UserHome from "./components/User/UserHome/UserHome.jsx";
 import AdminHome from "./components/Admin/AdminHome/AdminHome.jsx";
 import AdminNavbar from "./components/Admin/AdminNavbar/AdminNavbar.jsx";
+import AdminPerson from "./components/Admin/AdminPerson/AdminPerson.jsx";
 import { AdminUsers } from "./components/Admin/AdminUsers/AdminUsers.jsx";
 import { AdminMovies } from "./components/Admin/AdminMovies/AdminMovies.jsx";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
@@ -127,6 +128,16 @@ function App() {
           <ProtectedRoute token={token} role={role} requiredRole="admin">
             <AdminNavbar  setToken={setToken} setRole={setRole}/>
             <AdminMovies/>
+          </ProtectedRoute>
+        }
+      />
+        {/* Admin: persona */}  
+      <Route
+        path="/admin/admins"
+        element={
+          <ProtectedRoute token={token} role={role} requiredRole="admin">
+            <AdminNavbar  setToken={setToken} setRole={setRole}/>
+            <AdminPerson/>
           </ProtectedRoute>
         }
       />
