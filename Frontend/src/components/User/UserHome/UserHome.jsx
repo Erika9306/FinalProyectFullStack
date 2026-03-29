@@ -67,7 +67,7 @@ export default function UserHome(){
       <div className='search-movie'>
         <input className='search-movie-input'
           type="text"
-          placeholder='🔍 Buscar película'
+          placeholder='🔍 Buscar película por su título original'
           value = {searchMovie}
           onChange = {(e) => setSearchMovie(e.target.value)}
         />

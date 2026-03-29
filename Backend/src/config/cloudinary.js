@@ -8,12 +8,13 @@ const cloudinary = require('cloudinary').v2;
             api_secret: process.env.CLOUDINARY_API_SECRET
         });
      console.log('Connected to Cloudinary');
+     
 
     }catch(error){
         console.log('Could not connect to Cloudinary', error);
         
     }
 }
-module.exports = connectCloudinary;
+module.exports = { connectCloudinary, cloudinary };
 
 

@@ -6,13 +6,17 @@ import { useForm } from 'react-hook-form';
 import {Button} from '../../Button/Button'
 import "./UserProfile.css";
 
+
 export const UserProfile = () => {
     const URL = "https://finalproyectfullstack.onrender.com";
+
     const [user, setUser] = useState(null);
-    const [editAccount, setEditAccount]= useState(false);    
+    const [editAccount, setEditAccount]= useState(false);   
+    const [uploadFile, setUploadFile] = useState('url');
     const {register, handleSubmit, setValue, reset} = useForm();    
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
+
     const userId = jwtDecode(token)._id;
 
     useEffect(()=>{
@@ -33,7 +37,7 @@ export const UserProfile = () => {
                     setUser(result);
                     //setvalue ayudará que al terminar fetch el usuario vea sus datos actuales que estan en el DB
                     setValue('name', result.name);
-                    setValue('img', result.img);   
+                    setValue('imgUrl', result.img);   
                 }
             } catch (error) {
                 console.error("Error al obtener info", error);
@@ -46,20 +50,29 @@ export const UserProfile = () => {
         //cada vez que el usuario cambie, se actualizan los campos del formulario con los datos actuales del usuario
       
        //  ACTUALIZAR PERFIL
-    const handleEdit = useCallback(async (userData) => {      
-        if(!userData.password){
-            //si no hay contraseña, se borra el campo y no se manda al backend
-             //no cambia la contraseña antigua
-            delete userData.password;
+    const handleEdit = useCallback(async (userData) => {  
+        const picture = new FormData();
+        picture.append('name', userData.name);
+           
+        if(userData.password){
+            //si no hay contraseña nueva, se mantiene la antigua
+            picture.append('password', userData.password);
             }
+            //comprobamos que usario usba algo de Pc, si no, se mantieen la url antigua
+        if(uploadFile === "file" && userData.imgFile && userData.imgFile.length > 0){
+            picture.append("img", userData.imgFile[0]);
+        }else{
+        //si el usuario no sube imagen, se mantiene la antigua url
+        picture.append("img", userData.imgUrl);
+        }
+    
         try {
             const response = await fetch(`${URL}/api/v1/user/${userId}`, {
                 method: "PUT",
                 headers: {
                     "Authorization": `Bearer ${token}`,
-                    "Content-Type": "application/json"
                 },
-                body: JSON.stringify(userData)
+                body: picture
             });
 
             const result = await response.json();
@@ -77,7 +90,8 @@ export const UserProfile = () => {
         }
         //mandamos todas las dependecias 
         //ya que si no, funcion no renovará los datos de usuario
-    },[token, userId, reset]);
+    },[token, userId, reset, uploadFile]);
+
 
     // BORRAR CUENTA
     const deleteAccount = useCallback(async () => {
@@ -102,13 +116,13 @@ export const UserProfile = () => {
                     localStorage.removeItem('token');
                     localStorage.clear();
                     await Swal.fire('Eliminado', 'Tu cuenta ya no existe', 'success');
-                    navigate('/login');
+                    window.location.href = "/login"; 
                 }
             } catch (error) {
                 console.log("Error al borrar", error);
             }
         }
-    },[token, userId,navigate]);
+    },[token, userId]);
 
     if(!user){
         return <div> Cargando datos...</div>
@@ -133,7 +147,37 @@ export const UserProfile = () => {
                 <form onSubmit={handleSubmit(handleEdit)} className='edit-personal-info'>
                     <h3>Editar Datos</h3>
                     <input {...register ('name', {required: true, maxLength: 50})} placeholder='Nombre Completo'/>
-                    <input{...register('img')} placeholder='Imagen deseada'/>
+                    <div className='select-img'>
+                        <div className='toggle-buttons'>
+                            <Button
+                                type='button'
+                                text={"Url de imagen"}
+                                onClick={() => setUploadFile('url')}
+                                className={uploadFile === 'url' ? 'active' : ''}
+                            />
+                            <Button
+                                type='button'
+                                text={"Avatar desde Pc"}
+                                onClick={() => setUploadFile('file')}
+                                className={uploadFile === 'file' ? 'active' : ''}
+                            />
+                        </div>
+                        {uploadFile === 'url' ? (
+                            <input
+                                type="text"
+                                {...register('imgUrl')}
+                                placeholder='Url de imagen'
+                            />
+                        ) :  (
+                            <input
+                                type="file"
+                                {...register('imgFile')}
+                                accept="image/*"
+                            />
+                        ) 
+                        }
+             
+                    </div>                    
                     <input{...register('password')} placeholder=" Déjelo en blanco si no desee cambiar "/>
                     <div>
                         <Button 
@@ -148,7 +192,8 @@ export const UserProfile = () => {
                             onClick={() => {                              
                                 setEditAccount(false);
                                 setValue('name', user.name);
-                                setValue('img', user.img);
+                                setValue('imgUrl', user.img);
+                                setUploadFile('url');
                                 setValue('password', '');                                                     
                             }}
                         />

@@ -2,12 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
-
-const userRouter = require('./src/api/routes/user.js');
-const movieRouter = require('./src/api/routes/movie.js');
-const categoryRouter = require('./src/api/routes/category.js');
-const listRouter = require('./src/api/routes/listUserMovie.js');
-
 const connectDB = require('./src/config/db.js');
 const connectCloudinary = require('./src/config/cloudinary.js');
 
@@ -21,11 +15,6 @@ const PORT = process.env.PORT || 3000;
 // Global middlewares
 
 app.use(cors());
-// app.use(cors({
-//   origin: 'http://localhost:5173', 
-//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//   allowedHeaders: ['Content-Type', 'Authorization']
-// }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -38,6 +27,13 @@ async function startServer() {
         await connectCloudinary();
 
         //Routes
+        //importamos rutas aquí, para que Multer pueda procesar las imágenes
+        //  antes de que lleguen a los controladores
+        const userRouter = require('./src/api/routes/user.js');
+        const movieRouter = require('./src/api/routes/movie.js');
+        const categoryRouter = require('./src/api/routes/category.js');
+        const listRouter = require('./src/api/routes/listUserMovie.js');
+
         app.use('/api/v1/user', userRouter);
         app.use('/api/v1/movies', movieRouter);
         app.use('/api/v1/categories', categoryRouter);

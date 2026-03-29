@@ -53,7 +53,7 @@ export const UserFavourite = () => {
 
     return (
         <div>
-            <h2>Películas Favoritas</h2>
+            <h2>Historial de las Películas vistas</h2>
             {moviesSaved.length === 0 ? (
                 <div>🍿 No has visto ninguna película!</div>
             ):(

@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import "./AdminUsers.css";
 import{ Button } from '../../Button/Button';
+import { set } from 'mongoose';
 
 
 //usamos React.memo para memorizar el componente y evitar renders innecesarios
@@ -41,6 +42,7 @@ export const AdminUsers = React.memo(() => {
   //CREAR USUARIO
   const createUser = useCallback(async (data) =>{
     try{
+      setSearchUser('');
       const response = await fetch(`${URL}/api/v1/user/register`, {
         method: "POST",
         headers:{
@@ -77,12 +79,14 @@ export const AdminUsers = React.memo(() => {
   //usamos useCallback para memorizar la función y así se renderiza una vez
   //cargar usuario para luego poder usarlo en el form
     const retrieveUserInfo = useCallback((user) =>{
+      setSearchUser('');
       setEditUser(user);
       setEditUserForm(true);
     },[]);
  
   const handleEdit = useCallback(async(e )=> {
     e.preventDefault();
+    setSearchUser('');
     if(!editUser) return;
     try{
       const response = await fetch(`${URL}/api/v1/user/${editUser._id}`,{
@@ -117,6 +121,7 @@ export const AdminUsers = React.memo(() => {
   //  BORRAR
   const deleteUser = useCallback(async (user) => {
     try{
+    setSearchUser('');
     const result = await Swal.fire({
       title: `¿Estás seguro que quieres eliminar ${user.name}?`,
       icon: 'warning',
@@ -152,6 +157,7 @@ if(response.ok){
   // DETALLE
 
   const detailsUser = useCallback(async(user) => {   
+    setSearchUser('');
     const response = await fetch(`${URL}/api/v1/list/favourites/${user._id}`,{
       method: "GET",
       headers:{

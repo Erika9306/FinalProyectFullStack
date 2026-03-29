@@ -68,6 +68,7 @@ categoriesList();
 
  const createMovie = useCallback(async (data)=>{
   try{
+  setSearchMovie('');
   const response = await fetch(`${URL}/api/v1/movies`, {
     method: "POST",
         headers:{
@@ -105,6 +106,7 @@ categoriesList();
 
    //EDITAR PELÍCULA
 const retrieveMovieInfo = useCallback((movie) =>{
+  setSearchMovie('');
   setEditMovie(movie);
   setEditMovieForm(true);
 },[]);
@@ -149,6 +151,7 @@ const retrieveMovieInfo = useCallback((movie) =>{
   //Detalle
   //no hace falta hacer fetch ya que toda la info tenemos el estado
   const detailsMovies = useCallback(async(movie)=>{
+     setSearchMovie('');
     Swal.fire({
     title: `<strong>${movie.title}</strong>`,
     html: `
@@ -170,8 +173,8 @@ const retrieveMovieInfo = useCallback((movie) =>{
 //Borrar
 const deleteMovie = useCallback(async(movie)=>{ 
   try{
-
-const result = await Swal.fire({
+  setSearchMovie('');
+  const result = await Swal.fire({
       title: `¿Estás seguro que quieres eliminar ${movie.title}?`,
       icon: 'warning',
       showCancelButton: true,
@@ -220,7 +223,7 @@ const search = useMemo(()=>{
      <div className='search-movie'>
         <input className='search-movie-input'
         type="text"
-        placeholder='🔍 Buscar pelicula'
+        placeholder='🔍 Buscar pelicula según título'
         value = {searchMovie}
         onChange = {(e) => setSearchMovie(e.target.value)}
         />

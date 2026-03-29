@@ -99,13 +99,14 @@ const allowAdminCategory = async(req,res,next)=>{
 const allowChangingRole = async(req,res,next)=>{
     try{        
         const {id} = req.params;
+        const userRole = req.user;
         const findUser = await User.findById(id);
 
-        if(!findUser){
-            return res.status(404). json({message:` ${findUser} does not exist`});
-        }
-        if(findUser.role !== "admin"){
-            return res.status(403).json({message: "Admin permissions required"});
+       if(userRole.role !== 'admin'){
+        return res.status(403).json({message: "Not authorized to make changes"});
+       }
+         if(!findUser){ 
+            return res.status(404).json({message: "User not found"});
         }
         next();
 

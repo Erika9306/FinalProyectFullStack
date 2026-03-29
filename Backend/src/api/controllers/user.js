@@ -72,23 +72,32 @@ const deleteUser = async (req, res,next) => {
 
 const updateUser = async (req, res,next) => {
     try{
+        console.log("Datos recibidos para actualización:", req.body);
     const {id} = req.params;
-    const {img, name, password} = req.body;
+    const {img,name, password,role} = req.body;
     const user = await User.findById(id);
+   
     if(name){
         user.name = name;
     }
-    if(img){
-        user.img = img;
+    if(role){
+        user.role = role;
     }
+    if (req.file) {
+    user.img = req.file.path;
+    console.log("Imagen actualizada con nueva subida:", req.file.path);
+} else if (req.body.img) {
+    user.img = req.body.img;
+    console.log("Imagen actualizada con URL proporcionada:", req.body.img);
+}
     if(password){
         user.password = password;
     }
+    
     await user.save();
     return res.status(200).json(user);
-
     }catch(error){
-        return next(error);
+       return next(error);
     }
 }
 

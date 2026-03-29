@@ -49,10 +49,6 @@ td {
   border-bottom: 1px solid #edf2f7;
   font-size: 0.95rem;  
   color: var(--text-color);
+  cursor: default;
 }
 
-tbody tr:hover {
-  background-color: var(--secondary-color) !important;
-  transition: background-color 0.2s ease;
-  cursor: pointer;
-}

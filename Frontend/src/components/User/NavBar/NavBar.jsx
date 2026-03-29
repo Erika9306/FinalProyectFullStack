@@ -9,7 +9,7 @@ export const NavBar = ({setToken, setRole}) => {
       <ul>
         <li><NavLink to="/">🏠</NavLink></li>
         <li><NavLink to="/user/profile">👤</NavLink></li>
-        <li><NavLink to="/user/favourite">❤️</NavLink></li>
+        <li><NavLink to="/user/favourite">🍿</NavLink></li>
         
       </ul>
         <Logout setToken={setToken} setRole={setRole}/>
