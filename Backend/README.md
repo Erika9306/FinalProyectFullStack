@@ -1,6 +1,6 @@
 #  Movies Library (Backend)
 
-Backend es el ""cerebro" de la aplicación que gestiona una lista de películas. La API REST se encarga de autenticar los usuarios, manejar la inforamción en la base de datos y almacenar todo lo relevante y necesario para la aplicación.
+Backend es el ""cerebro" de la aplicación que gestiona una lista de películas. La API REST se encarga de autenticar los usuarios, manejar la información en la base de datos y almacenar todo lo relevante y necesario para la aplicación.
 
 ## Funciones Principales
 
@@ -26,12 +26,6 @@ Backend es el ""cerebro" de la aplicación que gestiona una lista de películas.
 - **Express.js:** Framework para la creación de rutas y gestión de peticiones HTTP. 
 - **MongoDB:**  Base de datos NoSQL para el modelado de objetos. 
 - **JSON Web tokens, Bcrypt:** Estándares de la industria para la seguridad y autenticación. 
-
-## Configuración
-Para desplegar este backend localmente:
-1. Instala las dependencias con `npm install`.
-2. Ejecuta el script de seeding: `node src/utils/seeds/seed.js`.
-3. Inicia el servidor: `npm run dev`.
 
 ---
 

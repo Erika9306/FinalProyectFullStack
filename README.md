@@ -2,6 +2,16 @@
 
  Este proyecto ha sido desarrollado siguiendo una arquitectura **MERN** (MongoDB, Express, React, Node.js). Ofrece una interfaz amigable y atractiva tanto para administradores como para usuarios finales. La aplicación se basa en una **arquitectura desacoplada**, separando el Backend del Frontend para que funcionen de forma independiente pero perfectamente sincronizada.
 
+
+## 🔗 Despliegue 
+| Entorno | Enlace |
+| :--- | :--- |
+| ** Frontend (Vercel)** | [Visitar Aplicación](https://final-proyect-full-stack-6553wppq0-erika9306s-projects.vercel.app) |
+| ** Backend (API Render)** | [Ver API](https://finalproyectfullstack.onrender.com) |
+
+---
+
+
 ##  Estructura del Proyecto
 
 El ecosistema se divide en dos grandes bloques que trabajan de forma paralela:
@@ -12,20 +22,14 @@ El ecosistema se divide en dos grandes bloques que trabajan de forma paralela:
 
 ##  Funcionalidades
 
-- **Sistema de Roles:** Middleware personalizado que decodifica el payload del JWT para restringir el acceso a rutas sensibles según el rol (admin/user).
-- **Seguridad Robusta:** Rutas protegidas en el cliente y servidor, con persistencia de sesión mediante LocalStorage y Tokens JWT.
+- **Sistema de Roles:** Middleware personalizado para restringir el acceso a rutas sensibles según el rol (admin/user).
+- **Seguridad Robusta:** Rutas protegidas en el cliente y el servidor, con persistencia de sesión mediante LocalStorage y Tokens JWT.
 - **Automatización de Datos:** Script personalizado para poblar la base de datos desde archivos CSV, asegurando un entorno de pruebas real desde el inicio.
 - **Buscador rápido**: Optimización mediante el hook useMemo para filtrar el catálogo en memoria del cliente, logrando resultados instantáneos sin peticiones extra al servidor y evitando recargas del navegador.
 - **Interfaz de Notificaciones**: Integración de SweetAlert2 para confirmar acciones críticas (como borrar una cuenta o añadir a favoritos) de forma elegante.
 - **Formularios de Alto Rendimiento**: Gestión de formularios usando React Hook Form, que reduce los re-renderizados innecesarios y validando los datos en tiempo real.
 - **Diseño Adaptativo (Responsive)**: Media Queries, garantiza que la aplicación sea perfectamente navegable en móviles, tablets y escritorio.
 
----
-
-##  Cómo poner en marcha el proyecto
-Para que el ecosistema funcione, debes arrancar ambos servicios por separado abriendo dos terminales:
-1. **Servidor (Backend):** El backend debe estar activo para que el frontend pueda consultar los datos y autenticar usuarios. link :https://finalproyectfullstack.onrender.com
-2. **Interfaz (Frontend)**: Una vez el backend esté corriendo (puerto 3000), arranca la interfaz.link: final-proyect-full-stack-6553wppq0-erika9306s-projects.vercel.app
 
 ---
 

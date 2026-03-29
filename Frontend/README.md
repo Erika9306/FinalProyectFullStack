@@ -18,19 +18,12 @@ Esta es la interfaz de usuario de la aplicación **Movies Library**, una aplicac
 
 ###  Panel de Usuario 
 - **Catálogo Dinámico:** Exploración de películas con carga asíncrona e información detallada.
-- **Lista de Favoritos:** Sección personal para gestionar películas preferidas pulsando el icono del ❤️.
+- ** Historial de Visualización:** Sección personal para consultar películas vistas con representado mediante el icono 🍿.
 - **Perfil Personal:** Edición de datos (nombre, contraseña, foto de perfíl) y opción de eliminar la cuenta propia.
 
 ###  Panel de Administración
 - **Control de Catálogo (CRUD):** Creación, edición y eliminación completa de películas, o usuarios.
 - **Control de Usuarios:** Capacidad para supervisar la comunidad, editar datos de usuarios o eliminarlos de la plataforma.
-
----
-
-## Instalación y Uso
-   Para desplegar este frontend localmente:
-1. Instala las dependencias con `npm install`.
-2. Inicia vite: `npm run dev`.
 
 ---
 
