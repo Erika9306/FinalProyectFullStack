@@ -36,7 +36,6 @@
   color: var(--text-color);
 }
 
-
 .admin-table thead {
   width: 100%; 
   background-color: #f8f9fa;
@@ -51,7 +50,6 @@
   color: var(--text-color);
 }
 
-
 .admin-table td {
   padding: 16px;
   border-bottom: 1px solid #edf2f7;
@@ -59,12 +57,14 @@
   color: var(--text-color);
 }
 
-
 .admin-table tbody tr:hover {
   background-color: var(--secondary-color) !important;
   transition: background-color 0.2s ease;
   cursor: pointer;
 }
+
+
+/*formulario editar*/
 .edit-admin-form {
   position: fixed !important;
   top: 20%;
@@ -85,14 +85,16 @@
   margin-bottom: 1rem;
 }
 
-.edit-admin-form input {
+.edit-admin-form input,
+.edit-admin-form select {
   padding: 0.5rem;
   border: 1px solid var(--secondary-color);
   border-radius: 12px;
+  margin-bottom: 0.3rem;
   color: var(--text-color);
   outline: none;
+ 
 }
-
 
 .action-buttons {
   display: flex;
