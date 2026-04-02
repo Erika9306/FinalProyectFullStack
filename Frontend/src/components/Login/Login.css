@@ -37,7 +37,10 @@
   background-color: var(--text-color);
   
 }
-
+.login-form input::placeholder {
+  color: var(--secondary-color) !important;
+  opacity: 0.6;
+}
 .login-form label {
   display: flex;
   flex-direction: column;

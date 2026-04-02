@@ -28,9 +28,6 @@
   color: var(--text-text-color);
   border: 1px solid var(--secondary-color);
 }
-.search-movie input::placeholder {
-  color: var(--text-text-color);
-}
 
 .search-movie input:focus {
   outline: none; 

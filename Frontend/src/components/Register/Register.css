@@ -60,7 +60,10 @@
   background:var(--background-color-admin);
   color: var(--text-color);
 }
-
+.register-form input::placeholder {
+  color: var(--secondary-color) !important;
+  opacity: 0.6;
+}
 .register-form button {
   margin-top: 1rem;
   margin-bottom: 0.5rem;

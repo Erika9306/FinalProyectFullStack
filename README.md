@@ -9,6 +9,9 @@
 | ** Frontend (Vercel)** | [Visitar Aplicación](https://final-proyect-full-stack-6553wppq0-erika9306s-projects.vercel.app) |
 | ** Backend (API Render)** | [Ver API](https://finalproyectfullstack.onrender.com) |
 
+> [!IMPORTANT]
+> **Nota sobre el rendimiento:** Debido al plan gratuito de **Render**, el servidor entra en "modo reposo" tras 15 minutos de inactividad. La primera carga de datos puede tardar **aproximadamente 1 minuto**.
+
 ---
 
 
