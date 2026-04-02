@@ -73,7 +73,9 @@ export default function MovieDetail() {
         </div>
         <div className='movie-description-div'>
           <p><strong>Sinopsis:</strong> {movie.sinopsis ?? "No hay sinopsis"}</p>        
-          <p><strong>Categoría:</strong> {movie.category?.title ?? "No pertenece a ninguna categoría"}</p>
+          <p><strong>Categoría:</strong> {movie.category?.title ?? "No pertenece a ninguna categoría"}</p>          
+          <p><strong>Director:</strong> {movie.director ?? "No disponible"}</p>
+          <p><strong>Año de lanzamiento:</strong> {movie.releaseYear ?? "No disponible"}</p>
         </div>
         
         {/* Video */}
