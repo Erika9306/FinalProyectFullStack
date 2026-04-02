@@ -35,4 +35,8 @@ textarea {
     color: var(--text-color);
     font-family: var(--font-style);
 }
+input, select {
+    color: var(--text-color);
+    font-family: var(--font-style);
+}
 

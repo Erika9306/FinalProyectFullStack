@@ -136,7 +136,7 @@ const retrieveMovieInfo = useCallback((movie) =>{
     //si cateogria cambio ,entocnes la inyectamso como el cambio de la info de pelis
     const updateMovie ={
       ...editMovie, 
-      category: categoria || { title: "Sin categoría", _id: categoryId }
+      category: categoria || { title: "Sin categoría"}
     };
 
     setMovies(prev => prev.map(m => m._id === editMovie._id? updateMovie : m));
