@@ -85,7 +85,7 @@ export const AdminPerson = React.memo(() => {
     <div className="admins-container">
       <h3>🛡️ Administradores ({admin.length})</h3>
       
-      {editAdminForm && editUser(
+      {editAdminForm && editUser && (
         <form className="edit-admin-form" onSubmit={handleEdit}>
           <h2>Editar Administrador</h2>
           <input 
