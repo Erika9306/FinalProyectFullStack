@@ -2,6 +2,7 @@
     width: 100%;
     background-color: var(--background-color-admin) !important;
     display: flex;
+    direction: row !important;
     position:sticky;
     top:0;
     justify-content: center;
@@ -21,7 +22,8 @@
  }
 
 ul{
-  
+  display: flex;
+  flex-direction: row !important;
   list-style: none;
   display: flex;
   gap: 2rem;
