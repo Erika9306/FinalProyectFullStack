@@ -30,4 +30,9 @@ body, html {
   font-family: var(--font-style);
   
 }
+textarea {
+    resize: none;
+    color: var(--text-color);
+    font-family: var(--font-style);
+}
 
