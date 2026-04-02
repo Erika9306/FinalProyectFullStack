@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import "./AdminPerson.css";
-import Button  from '../..Button/Button';
 
 export const AdminPerson = React.memo(() => {
   const URL = "https://finalproyectfullstack.onrender.com"; 
@@ -32,7 +31,7 @@ export const AdminPerson = React.memo(() => {
               <p><strong>{adm.name}</strong></p>
               <p><small>{adm.email}</small></p>
             </div>
-            
+{/*             
             <div className="admin-actions">
               <Button 
                 text="👁️ Detalle" 
@@ -49,8 +48,8 @@ export const AdminPerson = React.memo(() => {
                 onClick={() => console.log("Borrar", adm._id)} 
                 className="button-danger" 
               />
-            </div>
-          </li>
+            </div> */}
+              </li> 
         ))}
       </ul>
     </div>
