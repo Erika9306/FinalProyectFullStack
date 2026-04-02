@@ -24,7 +24,7 @@ export const AdminPerson = React.memo(() => {
   return (
     <div className="admin-person-container">
       <h3>🛡️ Administradores ({admin.length})</h3>
-      <ul className="admin-vertical-list">
+      <ul className="admin-list">
         {admin.map(adm => (
           <li key={adm._id} className="admin-card">
             <div className="admin-info">
