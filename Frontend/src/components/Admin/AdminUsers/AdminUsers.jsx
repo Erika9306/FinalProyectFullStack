@@ -72,7 +72,7 @@ export const AdminUsers = React.memo(() => {
       Swal.fire("Error en el servidor. Inténtalo de nuevo más tarde.");
       return;
     }
-  },[]);
+  },[reset]);
 
  
   //  EDITAR 
