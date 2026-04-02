@@ -44,7 +44,12 @@ export const AdminPerson = React.memo(() => {
       });
       if(response.ok){
         
-        setAdmin(previous => previous.map(u => u._id === editUser._id ? editUser : u));
+        setAdmin(previous =>
+         {if(editUser.role !=='admin'){
+            return previous.filter(u => u._id !== editUser._id);
+         }
+         previous.map(u => u._id === editUser._id ? editUser : u)
+        });
         setEditAdminForm(false);
         Swal.fire("¡Éxito!", `Admin ${editUser.name} actualizado`, "success");
       }
@@ -98,6 +103,16 @@ export const AdminPerson = React.memo(() => {
             value={editUser.email} 
             onChange={(e) => setEditUser({...editUser, email: e.target.value})}
           />
+                     
+          <select   
+            value={editUser.role}
+            onChange={e => setEditUser({...editUser, role: e.target.value})}
+          > 
+            <option value="" disabled hidden>Cambiar rol...</option>           
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+    
           <Button 
             text="Guardar"
             type="submit"

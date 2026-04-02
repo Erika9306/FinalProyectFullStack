@@ -10,12 +10,9 @@ export const UserProfile = () => {
     const URL = "https://finalproyectfullstack.onrender.com";
 
     const [user, setUser] = useState(null);
-    const [editAccount, setEditAccount]= useState(false); 
-    
-    const {register, handleSubmit, setValue, reset} = useForm();   
-    
+    const [editAccount, setEditAccount]= useState(false);     
+    const {register, handleSubmit, setValue, reset} = useForm();     
     const token = localStorage.getItem('token');
-
     const userId = jwtDecode(token)._id;
 
     useEffect(()=>{
