@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column; 
     padding: 2rem; 
+    align-items: flex-start;
 }
 h3{
     font-size: 1.2rem;
@@ -12,13 +13,11 @@ h3{
 .admin-list{   
     display: flex;
     flex-direction: column;
+    list-style: none !important;  
     color: var(--text-color);
     gap: 2rem;
-    list-style: none !important;
-    display: flex;
-    gap: 1rem;  
     margin-left: 2rem;
-    margin-right: 1rem;
+
 }
 h2{
     color: var(--text-color);
@@ -32,15 +31,15 @@ p{
 .admin-list li a{
     text-decoration: none !important;     
     font-size: 1rem;
-    color: var(--text-color);
+    color: var(--text-color) !important;
 }
-.admin-listli a, 
+.admin-list li a, 
 .admin-list li a:visited, 
 .admin-list li a:hover, 
 .admin-list li a:active, 
 .admin-list li a:focus {   
-    color: var(--primary-color);
+   
     text-decoration: none !important;
-    color: var(--text-color);
+    color: var(--text-color) !important;
     outline: none;
 }
