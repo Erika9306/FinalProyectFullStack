@@ -18,7 +18,7 @@ Esta es la interfaz de usuario de la aplicación **Movies Library**, una aplicac
 
 ###  Panel de Usuario 
 - **Catálogo Dinámico:** Exploración de películas con carga asíncrona e información detallada.
-- ** Historial de Visualización:** Sección personal para consultar películas vistas con representado mediante el icono 🍿.
+- **Historial de Visualización:** Sección personal para consultar, no editar, películas vistas con representado mediante el icono 🍿.
 - **Perfil Personal:** Edición de datos (nombre, contraseña, foto de perfíl) y opción de eliminar la cuenta propia.
 
 ###  Panel de Administración

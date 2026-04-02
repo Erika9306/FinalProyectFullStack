@@ -9,6 +9,9 @@ h3{
   margin-left: 0.2rem;
 }
 ul{   
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
     list-style: none;
     display: flex;
     gap: 2rem;
