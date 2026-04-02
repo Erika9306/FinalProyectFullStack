@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./AdminPerson.css";
-import { Button } from '../Button/Button'; 
+import{ Button } from '../../Button/Button.jsx';
 
 export const AdminPerson = React.memo(() => {
   const URL = "https://finalproyectfullstack.onrender.com"; 

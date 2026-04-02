@@ -12,7 +12,8 @@ ul{
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    list-style: none;
+    list-style: none !important;
+
     display: flex;
     gap: 2rem;
     margin-left: auto;
@@ -24,9 +25,10 @@ h2{
 }
 
 li a{
-    text-decoration: none;     
+    text-decoration: none !important;     
     font-size: 1rem;
 }
 li:hover a{
     color: var(--primary-color);
+    text-decoration: none !important;
 }
