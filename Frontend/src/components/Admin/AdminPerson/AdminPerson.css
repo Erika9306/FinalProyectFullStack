@@ -1,22 +1,23 @@
 .admin-person-container {
-  display: flex;
-  flex-direction: column;  
+    display: flex;
+    flex-direction: column; 
+    padding: 2rem; 
 }
 h3{
-  font-size: 1.2rem;
-  color: var(--text-color);
-  margin-bottom: 1.5rem;
-  margin-left: 0.2rem;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    margin-left: 0.2rem;
 }
 ul{   
     display: flex;
     flex-direction: column;
+    color: var(--text-color);
     gap: 2rem;
     list-style: none !important;
-
     display: flex;
-    gap: 2rem;
-    margin-left: auto;
+    gap: 1rem;  
+    margin-left: 2rem;
     margin-right: 1rem;
 }
 h2{
@@ -31,8 +32,15 @@ p{
 li a{
     text-decoration: none !important;     
     font-size: 1rem;
+    color: var(--text-color);
 }
-li:hover a{
+li a, 
+li a:visited, 
+li a:hover, 
+li a:active, 
+li a:focus {   
     color: var(--primary-color);
     text-decoration: none !important;
+    color: var(--text-color);
+    outline: none;
 }
