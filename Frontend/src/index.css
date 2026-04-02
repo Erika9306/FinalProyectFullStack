@@ -2,7 +2,8 @@
     --primary-color: #3d3d3d;           
     --secondary-color: #bbbbbb;          
     --main-color: #ff0202;              
-    --text-color: #0b0b0b; 
+    --text-color: #333333; 
+    --text-text-color: #060606;
     --background-color-user: #050505;    
     --background-color-admin: #dfdfdfe8;
     --font-style: "Book Antiqua", serif;
@@ -39,8 +40,8 @@ input, select {
     color: var(--text-color);
     font-family: var(--font-style);
 }
+
 a {
     text-decoration: none;
     color: inherit;
 }
-

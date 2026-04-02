@@ -37,7 +37,7 @@
 .info-users-details h3,
 .info-movies-details h3, 
 .info-admins-details h3 { 
-  color: var(--text-color);
+  color: var(--text--text-color);
   font-size: 1.5rem;
 }
 .info-users-details p,
