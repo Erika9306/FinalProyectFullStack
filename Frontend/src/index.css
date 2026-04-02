@@ -39,4 +39,8 @@ input, select {
     color: var(--text-color);
     font-family: var(--font-style);
 }
+a {
+    text-decoration: none;
+    color: inherit;
+}
 

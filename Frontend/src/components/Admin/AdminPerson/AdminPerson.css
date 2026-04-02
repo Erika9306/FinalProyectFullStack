@@ -1,45 +1,89 @@
-.admin-person-container {
-    display: flex;
-    flex-direction: column; 
-    padding: 2rem; 
-    align-items: flex-start;
-}
-h3{
-    font-size: 1.2rem;
-    color: var(--text-color);
-    margin-bottom: 1.5rem;
-    margin-left: 0.2rem;
-}
-.admin-list{   
-    display: flex;
-    flex-direction: column;
-    list-style: none !important;  
-    color: var(--text-color);
-    gap: 2rem;
-    margin-left: 2rem;
 
-}
-h2{
-    color: var(--text-color);
-    font-size: 1.5rem;   
-}
-p{
-    color: var(--text-color);
-    font-size: 1rem;
+.admins-container {
+  width: 100%;
+  padding: 1rem;
+  background: var(--background-color-admin);
 }
 
-.admin-list li a{
-    text-decoration: none !important;     
-    font-size: 1rem;
-    color: var(--text-color) !important;
+
+.admins-container h2 {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  margin-bottom: 1.7rem;
 }
-.admin-list li a, 
-.admin-list li a:visited, 
-.admin-list li a:hover, 
-.admin-list li a:active, 
-.admin-list li a:focus {   
-   
-    text-decoration: none !important;
-    color: var(--text-color) !important;
-    outline: none;
+
+.admins-container h3 {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+  margin-left: 0.2rem;
+}
+
+.admin-list {
+  width: 100%; 
+  background: var(--background-color-admin);
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+  margin-top: 1rem;
+  margin-left: 0.2rem;
+  overflow: hidden;
+}
+
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;  
+  color: var(--text-color);
+}
+
+
+.admin-table thead {
+  width: 100%; 
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #edf2f7;
+}
+
+.admin-table th {
+  text-align: left;
+  padding: 1rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;  
+  color: var(--text-color);
+}
+
+
+.admin-table td {
+  padding: 16px;
+  border-bottom: 1px solid #edf2f7;
+  font-size: 0.95rem;  
+  color: var(--text-color);
+}
+
+
+.admin-table tbody tr:hover {
+  background-color: var(--secondary-color) !important;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+
+/* MEDIA Queries */
+
+@media (max-width: 480px) {
+  .admin-table tbody, 
+  .admin-table th, 
+  .admin-table td, 
+  .admin-table tr {
+    display: block;
+  }
+  
+  .admin-table thead {
+    display: none;
+  }
+
+  .admin-table td {
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
 }
