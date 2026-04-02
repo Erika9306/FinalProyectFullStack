@@ -122,7 +122,7 @@ export const AdminPerson = React.memo(() => {
             {admin.map(adm => (
               <tr key={adm._id}>
                 <td><strong>{adm.name}</strong></td>
-                <td>{adm.email}</td>
+                <td>{adm.email}</td>                
                 <td>
                   <div className="action-buttons">
                     <Button 
