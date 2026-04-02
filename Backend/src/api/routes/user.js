@@ -10,7 +10,7 @@ const auths = [isAuth, allowDeleteUser];
 router.post("/login", login);
 router.get("/:id", isAuth,getUser);
 router.get("/", isAuth, getUsers);
-router.post("/register", upload.single('img'), postUser);
+router.post("/register", postUser);
 router.put("/:id", isAuth, upload.single('img'), updateUser);
 router.delete("/:id", auths, deleteUser);
 

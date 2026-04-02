@@ -74,7 +74,7 @@ const updateUser = async (req, res,next) => {
     try{
         console.log("Datos recibidos para actualización:", req.body);
     const {id} = req.params;
-    const {img,name, password,role} = req.body;
+    const {name, password,role} = req.body;
     const user = await User.findById(id);
    
     if(name){
@@ -86,11 +86,11 @@ const updateUser = async (req, res,next) => {
     if (req.file) {
     user.img = req.file.path;
     console.log("Imagen actualizada con nueva subida:", req.file.path);
-} else if (req.body.img) {
-    user.img = req.body.img;
-    console.log("Imagen actualizada con URL proporcionada:", req.body.img);
+// } else if (req.body.img) {
+//     user.img = req.body.img;
+//     console.log("Imagen actualizada con URL proporcionada:", req.body.img);
 }
-    if(password){
+    if(password && password !== ''){
         user.password = password;
     }
     

@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { jwtDecode } from "jwt-decode";
-import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import {Button} from '../../Button/Button'
 import "./UserProfile.css";
@@ -11,10 +10,10 @@ export const UserProfile = () => {
     const URL = "https://finalproyectfullstack.onrender.com";
 
     const [user, setUser] = useState(null);
-    const [editAccount, setEditAccount]= useState(false);   
-    const [uploadFile, setUploadFile] = useState('url');
-    const {register, handleSubmit, setValue, reset} = useForm();    
-    const navigate = useNavigate();
+    const [editAccount, setEditAccount]= useState(false); 
+    
+    const {register, handleSubmit, setValue, reset} = useForm();   
+    
     const token = localStorage.getItem('token');
 
     const userId = jwtDecode(token)._id;
@@ -37,7 +36,7 @@ export const UserProfile = () => {
                     setUser(result);
                     //setvalue ayudará que al terminar fetch el usuario vea sus datos actuales que estan en el DB
                     setValue('name', result.name);
-                    setValue('imgUrl', result.img);   
+                      
                 }
             } catch (error) {
                 console.error("Error al obtener info", error);
@@ -54,17 +53,17 @@ export const UserProfile = () => {
         const picture = new FormData();
         picture.append('name', userData.name);
            
-        if(userData.password){
+        if(userData.password !== ''){
             //si no hay contraseña nueva, se mantiene la antigua
             picture.append('password', userData.password);
             }
             //comprobamos que usario usba algo de Pc, si no, se mantieen la url antigua
-        if(uploadFile === "file" && userData.imgFile && userData.imgFile.length > 0){
+        if(userData.imgFile && userData.imgFile.length > 0){
             picture.append("img", userData.imgFile[0]);
-        }else{
-        //si el usuario no sube imagen, se mantiene la antigua url
-        picture.append("img", userData.imgUrl);
-        }
+        // }else{
+        // //si el usuario no sube imagen, se mantiene la antigua url
+        // picture.append("img", userData.imgUrl);
+         }
     
         try {
             const response = await fetch(`${URL}/api/v1/user/${userId}`, {
@@ -90,7 +89,7 @@ export const UserProfile = () => {
         }
         //mandamos todas las dependecias 
         //ya que si no, funcion no renovará los datos de usuario
-    },[token, userId, reset, uploadFile]);
+    },[token, userId, reset]);
 
 
     // BORRAR CUENTA
@@ -147,38 +146,8 @@ export const UserProfile = () => {
                 <form onSubmit={handleSubmit(handleEdit)} className='edit-personal-info'>
                     <h3>Editar Datos</h3>
                     <input {...register ('name', {required: true, maxLength: 50})} placeholder='Nombre Completo'/>
-                    <div className='select-img'>
-                        <div className='toggle-buttons'>
-                            <Button
-                                type='button'
-                                text={"Url de imagen"}
-                                onClick={() => setUploadFile('url')}
-                                className={uploadFile === 'url' ? 'active' : ''}
-                            />
-                            <Button
-                                type='button'
-                                text={"Avatar desde Pc"}
-                                onClick={() => setUploadFile('file')}
-                                className={uploadFile === 'file' ? 'active' : ''}
-                            />
-                        </div>
-                        {uploadFile === 'url' ? (
-                            <input
-                                type="text"
-                                {...register('imgUrl')}
-                                placeholder='Url de imagen'
-                            />
-                        ) :  (
-                            <input
-                                type="file"
-                                {...register('imgFile')}
-                                accept="image/*"
-                            />
-                        ) 
-                        }
-             
-                    </div>                    
-                    <input{...register('password')} placeholder=" Déjelo en blanco si no desee cambiar "/>
+                     <input type="file" {...register('imgFile')} placeholder='Sube avatar' accept="image/*" />                   
+                    <input{...register('password')} placeholder=" Déjalo en blanco si no desee cambiar "/>
                     <div>
                         <Button 
                             type="submit" 
@@ -191,9 +160,7 @@ export const UserProfile = () => {
                             className='button-danger'
                             onClick={() => {                              
                                 setEditAccount(false);
-                                setValue('name', user.name);
-                                setValue('imgUrl', user.img);
-                                setUploadFile('url');
+                                setValue('name', user.name);                                                      
                                 setValue('password', '');                                                     
                             }}
                         />
