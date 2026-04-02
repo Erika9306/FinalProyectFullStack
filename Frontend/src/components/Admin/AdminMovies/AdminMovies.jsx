@@ -130,13 +130,13 @@ const retrieveMovieInfo = useCallback((movie) =>{
     if(!response.ok){
       console.log("Error al editar película")
     }
-    const categoryId = editMovie.category._id || editMovie.category;
+    const categoryId = editMovie.category?._id || editMovie.category;
     console.log('Category ID:', categoryId, typeof categoryId);
-    const categoria = categories.find(c=> c._id === categoryId );
+    const categoria = categories.find(c=> String(c._id) === String(categoryId));
     //si cateogria cambio ,entocnes la inyectamso como el cambio de la info de pelis
     const updateMovie ={
       ...editMovie, 
-      category: categoria || { title: "Sin categoría" }
+      category: categoria || { title: "Sin categoría", _id: categoryId }
     };
 
     setMovies(prev => prev.map(m => m._id === editMovie._id? updateMovie : m));
