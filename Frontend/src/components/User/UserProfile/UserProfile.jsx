@@ -144,7 +144,7 @@ export const UserProfile = () => {
                     <h3>Editar Datos</h3>
                     <input {...register ('name', {required: true, maxLength: 50})} placeholder='Nombre Completo'/>
                      <input type="file" {...register('imgFile')} className='file-button' placeholder='Sube avatar' accept="image/*" />                   
-                    <input{...register('password')} placeholder=" Déjalo en blanco si no desee cambiar "/>
+                    <input{...register('password')} placeholder=" Cambiar contraseña (si no la quieres cambiar déjalo en blanco) "/>
                     <div>
                         <Button 
                             type="submit" 

@@ -27,6 +27,51 @@ Backend es el ""cerebro" de la aplicación que gestiona una lista de películas.
 - **MongoDB:**  Base de datos NoSQL para el modelado de objetos. 
 - **JSON Web tokens, Bcrypt:** Estándares de la industria para la seguridad y autenticación. 
 
+
+## Uso de la API
+La API requiere autenticación mediante **JSON Web Tokens (JWT)** para realizar la mayoría de sus operaciones.
+- **Autenticación y la Seguridad de la aplicación**: para las rutas protegidas se debe incluir el token que se obtiene mediante login dentro de las cabecezas de la petición HTTP:
+
+| Permisos de Acceso | Descripción |
+| :--- | :--- |
+| ** Público** | No tiene restricciones para poder entrar por primera vez (Login/Register) |
+| ** User// | Necesita un token que sea válido para el acceso a la plataforma. Permisos de lectura y gestíon de información personal |
+| ** Admin// | Requiere un token válido y rol de administrador. El puede modificar el todo el contenido de las películas y usuarios |
+
+## Endpoints
+
+### Usuario
+
+| Método | Endpoint | Descripción | Acceso |
+| :--- | :--- | :--- | :--- |
+| **POST** | `/api/users/register` | Registro de un nuevo usuario | Público |
+| **POST** | `/api/users/login` | Login que devuelve un JWT Token | Público |
+| **GET** | `/api/users` | Lista de todos los usuarios | Admin |
+| **GET** | `/api/users/:id` | Obtener información de un usuario | Usuario (Propio) / Admin |
+| **PUT** | `/api/users/:id` | Actualizar perfil | Usuario (Propio) / Admin |
+| **DELETE** | `/api/users/:id` | Borrar usuario en concreto | Usuario (Cuenta propia) / Admin |
+
+### Películas
+
+
+| Método | Endpoint | Descripción | Acceso |
+| :--- | :--- | :--- | :--- |
+| **GET** | `/api/movies` | Listar catálogo completo | Usuario / Admin |
+| **GET** | `/api/movies/:id` | Ver detalle de una película | Usuario / Admin |
+| **POST** | `/api/movies` | Subir nueva película | Admin |
+| **PUT** | `/api/movies/:id` | Editar película y poster | Admin |
+| **DELETE** | `/api/movies/:id` | Eliminar película del catálogo | Admin |
+
+
+### Categorías y Listas
+
+| Método | Endpoint | Descripción | Acceso |
+| :--- | :--- | :--- | :--- |
+| **GET** | `/api/categories` | Visualizar categorías (géneros) | Usuario / Admin |
+| **POST** | `/api/categories` | Crear nueva categoría | Admin |
+| **POST** | `/api/lists/add/:movieId` | Añadir película a "Vistos" | Usuario |
+| **GET** | `/api/lists/favourites/:userId` | Ver películas vistas de un usuario | Usuario (Propio) / Admin |
+
 ---
 
 **Autor:** Erika Bausyte  
