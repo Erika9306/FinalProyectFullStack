@@ -217,7 +217,7 @@ const search = useMemo(()=>{
     <div className='users-table'>
       <h2> 👤 Usuarios Registrados</h2>
     
-      <h3>Total: {users.length} usuarios</h3>
+      <h3 className='title-total'>Total: {users.length} usuarios</h3>
 
       <div className='search-user'>
         <input className='search-user-input'

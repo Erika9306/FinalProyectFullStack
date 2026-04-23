@@ -1,14 +1,13 @@
 
 .admins-container {
-  width: 100%;
-  padding: 1rem;
+  width: 100%;  
   background: var(--background-color-admin);
 }
 
 
 .admins-container h2 {
   font-size: 1.5rem;
-  color: var(--text-color);
+  color: var(--main-color)!important;
   margin-bottom: 1.7rem;
 }
 
@@ -26,7 +25,6 @@
   box-shadow: var(--box-shadow);
   margin-top: 1rem;
   margin-left: 0.2rem;
-  overflow: hidden;
 }
 
 
@@ -53,8 +51,10 @@
 .admin-table td {
   padding: 16px;
   border-bottom: 1px solid #edf2f7;
-  font-size: 0.95rem;  
-  color: var(--text-color);
+  font-size: 1rem;  
+  font-weight: 600;
+  color: var(--secondary-color) !important;  
+  transition:color 0.2s ease;
 }
 
 .admin-table tbody tr:hover {
@@ -63,6 +63,9 @@
   cursor: pointer;
 }
 
+.admin-table tbody tr:hover td {
+  color: var(--text-color) !important;
+}
 
 /*formulario editar*/
 .edit-admin-form {
@@ -73,7 +76,7 @@
   display: flex;
   flex-direction: column;
   width: 40%;
-  background: var(--background-color-admin);
+  background: var(--secondary-color);
   padding: 2rem;
   gap: 0.8rem;
   border-radius: 12px;

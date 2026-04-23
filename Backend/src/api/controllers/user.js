@@ -25,6 +25,10 @@ const getUsers =async (req, res, next) =>{
 
 const postUser = async (req, res,next) => {
     try{
+        const user = await User.findOne({email: req.body.email});
+        if(user){
+            return res.status(400).json({message: "User already exists"});
+        }
 
         const newUser = new User({
             name: req.body.name,

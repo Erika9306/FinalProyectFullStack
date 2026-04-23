@@ -1,6 +1,6 @@
  .navbar{
     width: 100%;
-    background-color: var(--background-color-admin) !important;
+    background-color: var(--secondary-color) !important;
     display: flex;
     direction: row !important;
     position:sticky;

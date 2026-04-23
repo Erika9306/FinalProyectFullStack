@@ -1,21 +1,22 @@
-h2{
+.movies-table h2{
   font-size: 1.5rem;
-  color: var(--text-color);
+  color: var(--main-color)!important;
   margin-bottom: 1.7rem;
 }
 h3{
   font-size: 1.2rem;
-  color: var(--text-color);
+  color: var(--secondary-color);
   margin-bottom: 1.5rem;
   margin-left: 0.2rem;
 }
 
 
 /* El Buscador */
-.search-movie {
+input.search-movie {
   position: relative;
   width: 60%;
   margin-bottom: 2rem;
+  color: var(--text-text-color);
 }
 
 .search-movie-input { 
@@ -38,11 +39,11 @@ h3{
   position: absolute;
   top: 100%; 
   left:0;
-  width: 60%;
+  width: 80%;
   align-items: center;
   justify-content:space-between;
   gap:1rem;
-  background-color: var(--background-color-admin);
+  background-color: var(--secondary-color);
   border-radius: 12px;       
   margin-top: 1rem;  
   z-index: 100;
@@ -80,7 +81,7 @@ h3{
   display: flex;
   flex-direction: column;
   width: 40%;
-  background: var(--background-color-admin);
+  background: var(--secondary-color);
   padding: 2rem;
   gap: 0.5rem;
   border-radius: 12px;
@@ -127,7 +128,7 @@ h3{
 } 
 
 table {
-   width: 100%;
+  width: 100%;
   border-collapse: collapse;  
   color: var(--text-color);
 }
@@ -148,15 +149,19 @@ th {
 td {
   padding: 16px;
   border-bottom: 1px solid #edf2f7;
-  font-size: 0.95rem;  
-  color: var(--text-color);
+  font-size: 1rem;  
+  font-weight: 600;
+  color: var(--secondary-color)!important; 
+  transition: color 0.2s ease; 
 }
-
-
 tbody tr:hover {
   background-color: var(--secondary-color) !important;
   transition: background-color 0.2s ease;
   cursor: pointer;
+}
+
+tbody tr:hover td {
+  color: var(--text-color) !important;
 }
 
 @media (max-width: 480px) {
@@ -165,7 +170,7 @@ tbody tr:hover {
     width: 90%;
   }
   .search-result-div{
-     position: relative !important;
+    position: relative !important;
     top:0 !important;      
     padding: 0.5rem 1rem;
     margin-bottom: 2rem;

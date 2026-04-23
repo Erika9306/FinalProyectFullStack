@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import {jwtDecode} from "jwt-decode";
 import Swal from "sweetalert2";
 import "./Login.css";
@@ -13,6 +13,7 @@ export default function Login({setRole, setToken}) {
        //handleSubmit ya valorará el input y llamará a onSubmit si todo es correcto
        //no hace falta useState con react-hook-form, además hace e.preventDefault()automáticamente
     handleSubmit,
+    setError,
     formState:{ errors }
   } = useForm();
   
@@ -32,7 +33,9 @@ export default function Login({setRole, setToken}) {
       const result = await response.json();
       console.log("Respuesta Login:", result);
 
-      if (!response.ok) {        
+      if (!response.ok) { 
+        setError("email", { message: "Email o contraseña incorrectos" });
+              
         Swal.fire("Email o contraseña incorrectos");
         return;
       }

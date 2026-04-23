@@ -54,7 +54,7 @@ export const UserProfile = () => {
             //si no hay contraseña nueva, se mantiene la antigua
             picture.append('password', userData.password);
             }
-            //comprobamos que usario usba algo de Pc, si no, se mantieen la url antigua
+            //comprobamos que usuario suba imagen de Pc, si no, se mantieen la url antigua
         if(userData.imgFile && userData.imgFile.length > 0){
             picture.append("img", userData.imgFile[0]);
         // }else{

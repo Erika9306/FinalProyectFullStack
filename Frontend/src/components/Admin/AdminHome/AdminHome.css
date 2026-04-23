@@ -1,6 +1,13 @@
+h1{
+  margin-top: 2.5rem;
+  color: var(--main-color)!important;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  }
+
 .info-content {
- background:var(--secondary-color) !important;
- display: flex;
+  color: var(--secondary-color)!important;
+  display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
@@ -20,10 +27,11 @@
   padding: 1.2rem;
   margin-right: 2rem;
   border-radius: 12px;
-  gap: 1rem;;
+  gap: 1rem;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  color: var(--secondary-color)!important;
   
 }
 
@@ -37,7 +45,7 @@
 .info-users-details h3,
 .info-movies-details h3, 
 .info-admins-details h3 { 
-  color: var(--text-color);
+  color: var(--secondary-color)!important;
   font-size: 1.5rem;
 }
 .info-users-details p,
@@ -46,15 +54,35 @@
 
   font-size: 1.2rem; 
   font-weight: bold;
-  color: var(--text-color); 
+  color: var(--secondary-color)!important;
   }
 
-h1{
-  margin-top: 2.5rem;
-  color: var(--text-color);
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  }
+.info-users-card:hover,
+.info-movies-card:hover,
+.info-admins-card:hover {
+  background-color: var(--secondary-color) !important; 
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+
+.info-users-card:hover h3,
+.info-movies-card:hover h3,
+.info-admins-card:hover h3,
+.info-users-card:hover p,
+.info-movies-card:hover p,
+.info-admins-card:hover p {
+  color: var(--text-color) !important; 
+}
+
+.info-admins-icon,
+.info-admins-details,
+.info-users-icon,
+.info-users-details,
+.info-movies-icon,
+.info-movies-details{
+  cursor:default !important;
+}
 
 @media (max-width: 480px) {
   .info-content h3 {

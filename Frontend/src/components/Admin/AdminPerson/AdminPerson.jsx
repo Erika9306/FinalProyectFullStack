@@ -88,19 +88,21 @@ export const AdminPerson = React.memo(() => {
 
   return (
     <div className="admins-container">
-      <h3>🛡️ Administradores ({admin.length})</h3>
+      <h2>🛡️ Administradores </h2>
       
       {editAdminForm && editUser && (
         <form className="edit-admin-form" onSubmit={handleEdit}>
-          <h2>Editar Administrador</h2>
+          <h3>Editar Administrador</h3>
           <input 
             type="text" 
             value={editUser.name} 
+            placeholder='Nombre Completo'
             onChange={(e) => setEditUser({...editUser, name: e.target.value})}
           />
           <input 
             type="email" 
             value={editUser.email} 
+            placeholder='Email'
             onChange={(e) => setEditUser({...editUser, email: e.target.value})}
           />
                      
