@@ -6,6 +6,7 @@ import {Logout} from "../../Logout/Logout";
 export const NavBar = ({setToken, setRole}) => {
   return (
     <nav className="navbar-user">
+    
       <ul>
         <li><NavLink to="/">🏠</NavLink></li>
         <li><NavLink to="/user/profile">👤</NavLink></li>

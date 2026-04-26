@@ -79,6 +79,7 @@ export default function Login({setRole, setToken}) {
           <input
             type="password"
             placeholder="Contraseña"
+            className="password"
             {...register('password', {required:true, maxLength:50})}
             />
             {errors.password && <span className="errors-div" >Contraseña es obligatoria</span>}

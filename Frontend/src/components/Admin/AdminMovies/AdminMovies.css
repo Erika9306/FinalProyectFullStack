@@ -5,12 +5,16 @@
 }
 h3{
   font-size: 1.2rem;
-  color: var(--secondary-color);
+  color: var(--secondary-color )!important;
   margin-bottom: 1.5rem;
   margin-left: 0.2rem;
 }
 
-
+h4{
+  color: var(--text-color)!important;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
 /* El Buscador */
 input.search-movie {
   position: relative;
@@ -39,7 +43,7 @@ input.search-movie {
   position: absolute;
   top: 100%; 
   left:0;
-  width: 80%;
+  width: 100%;
   align-items: center;
   justify-content:space-between;
   gap:1rem;
@@ -175,6 +179,9 @@ tbody tr:hover td {
     padding: 0.5rem 1rem;
     margin-bottom: 2rem;
     background-color: var(--background-color-admin);
+  }
+  .category-td{
+    display: none;
   }
   
   .add-movie-button{

@@ -92,3 +92,8 @@ h1{
     font-size: 1.5rem;
   }
 }
+.info-users-card:hover p,
+.info-movies-card:hover p,
+.info-admins-card:hover p {
+  font-weight: bold; 
+}

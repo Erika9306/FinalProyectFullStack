@@ -225,9 +225,14 @@ const search = useMemo(()=>{
      <div className='search-movie'>
         <input className='search-movie-input'
         type="text"
-        placeholder='🔍 Buscar pelicula según título'
+        placeholder='🔍 Buscar pelicula según título original'
         value = {searchMovie}
         onChange = {(e) => setSearchMovie(e.target.value)}
+        onBlur = {() => {
+            setTimeout(() => {
+              setSearchMovie('');
+            }, 200);
+          }}
         />
 
      {searchMovie !== '' && (
@@ -275,7 +280,7 @@ const search = useMemo(()=>{
       {
         addMoviesForm &&(
           <form onSubmit ={handleSubmit(createMovie)} className='create-movie-form'>
-            <h3>➕ Añadir Película</h3>
+            <h4>➕ Añadir Película</h4>
           <input
             type="text"
             placeholder="Título"
@@ -352,7 +357,7 @@ const search = useMemo(()=>{
 
 {editMovieForm && editMovie &&(
   <form onSubmit={handleEdit} className='edit-movie-form'>
-     <h3>✏️ Editar Película</h3> 
+     <h4>✏️ Editar Película</h4> 
     <input 
       type='text'
       placeholder='Título'
@@ -453,7 +458,7 @@ const search = useMemo(()=>{
                 
               </td>
               <td>{m.title}</td>  
-              <td>{m.category.title || "Sin categoría"}</td>            
+              <td className='category-td'>{m.category.title || "Sin categoría"}</td>            
              
               <td className='actions'>
                 <Button 

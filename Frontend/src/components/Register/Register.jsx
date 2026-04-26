@@ -17,31 +17,33 @@ export default function Register({setToken, setRole}) {
 
   const onRegister = async (data)=>{
     try {
-      const formData = new FormData();
-      formData.append("name", data.name);
-      formData.append("email", data.email);
-      formData.append("password", data.password);
-
-      if(data.imgFile && data.imgFile.length > 0){
-        formData.append("img", data.imgFile[0]);
-      }
-      //si usuario sube imagen, se envía como FormData, si no, se envía como JSON sin el campo img, para que el backend mantenga la url antigua
-      else{
-        formData.append("img", data.imgUrl);
-      }
+      
       const response = await fetch(`${URL}/api/v1/user/register`, {
         method: "POST",
-        body: formData
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({          
+          name: data.name,
+          email: data.email,
+          password: data.password,
+           }),
       });
       const result = await response.json();
       console.log("Respuesta de registro:", result);
 
       if (!response.ok) {
-        setError("email", { message: result.message || "Error al registrarse" });
-        Swal.fire(result.message || "Error al registrarse");
-        console.log("error al registrarse", result);
+        if(result.message === "User already exists"){
+          setError("email", { message: "Usuario ya existe" });
+          Swal.fire("Usuario ya existe");
+          return;
+        }else{
+          setError("email", { message: result.message || "Error al registrarse" });
+          Swal.fire(result.message || "Error al registrarse");
+          console.log("Error al registrarse", result);
         return;
       }
+    }
       if(response.ok){
         localStorage.setItem("token",result.token);           
       }
@@ -93,19 +95,17 @@ export default function Register({setToken, setRole}) {
           <input
             type="password"            
             placeholder="Contraseña"
-            {...register('password',{required:"Contraseña es obligatoria!", minLength:6, maxLength: 20})}
+            {...register('password',{required:"Contraseña es obligatoria!", 
+              minLength:{
+                value:6,
+                message: "Mínimo 6 caracteres"},
+              maxLength:{
+                value:20,
+                message: "Máximo 20 caracteres"}})}
           />
           {errors.password && <span className="errors">{errors.password.message}</span>}
         </label>
-        <label>
-          Foto de perfil (opcional)
-          <input
-            type="file"
-            accept="image/*"
-            {...register('imgFile')}
-          />
-        </label>
-
+       
         <button type="submit">Registrarse</button>
 
         <div className="register-meta">

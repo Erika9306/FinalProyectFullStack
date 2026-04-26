@@ -10,7 +10,7 @@ export default function AdminNavbar({setToken, setRole}) {
   return (
     <div className="navbar">
     <nav >
-      <h2>Panel de Administrador</h2>
+      <h2>Administrador</h2>
      <ul>
         <li><Link to="/admin/home">🏠</Link></li>
         <li><Link to="/admin/users" >👤</Link></li>

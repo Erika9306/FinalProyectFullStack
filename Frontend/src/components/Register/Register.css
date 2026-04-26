@@ -33,6 +33,14 @@
   color: var(--main-color) !important; 
   background-color: var(--text-color);
   }
+  
+.register-form input{
+  color: var(--secondary-color) !important;
+}
+.register-form input::placeholder {
+  color: var(--secondary-color) !important;
+  opacity: 0.6;
+}
 
 .register-form label {
   display: flex;
@@ -48,21 +56,17 @@
   margin-top: 0.5rem;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.2);  
-  color: var(--secondary-color);
+  color: var(--secondary-color) !important;
   font-size: 1rem;
   transition: border-color 0.3s ease;
   background:var(--primary-color);
 }
-
 .register-form input:focus {
   outline: none;
-  border-color: var(--text-color);
-  background:var(--background-color-admin);
-  color: var(--text-color);
-}
-.register-form input::placeholder {
-  color: var(--secondary-color) !important;
-  opacity: 0.6;
+  border-color: var(--main-color); 
+  background: var(--primary-color); 
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+  color: var(--secondary-color) !important; 
 }
 .register-form button {
   margin-top: 1rem;
@@ -74,14 +78,16 @@
   font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
-  background: var(--button--danger);
+  background: var(--button--danger); 
   transition: transform 0.2s, opacity 0.2s;
 }
+
 
 .register-form button:hover {
   transform: translateY(-2px);
   opacity: 0.9;
 }
+
 
 /* enlace para login*/
 .register-meta {

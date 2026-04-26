@@ -225,6 +225,11 @@ const search = useMemo(()=>{
         placeholder='🔍 Buscar usuario'
         value = {searchUser}
         onChange = {(e) => setSearchUser(e.target.value)}
+        onBlur = {() => {
+            setTimeout(() => {
+              setSearchUser('');
+            }, 200);
+          }}
         />
      {searchUser !== '' && (
     <div className='search-result-div'>
@@ -267,7 +272,7 @@ const search = useMemo(()=>{
      
      {addUserForm && (      
       <form onSubmit ={handleSubmit(createUser)} className='create-user-form'>
-        <h3>➕ Añadir Usuario</h3> 
+        <h4>➕ Añadir Usuario</h4> 
         <input 
         type='text'
         placeholder='Nombre Completo'
@@ -318,7 +323,7 @@ const search = useMemo(()=>{
       
 {editUserForm && editUser && (
   <form onSubmit={handleEdit} className='edit-user-form'>
-    <h3>✏️ Editar Usuario</h3> 
+    <h4>✏️ Editar Usuario</h4> 
     
     <input 
       type='text'

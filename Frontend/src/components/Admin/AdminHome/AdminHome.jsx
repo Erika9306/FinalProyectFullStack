@@ -49,42 +49,44 @@ export default function AdminHome() {
     fetchData();
   }, []);
 
-   return (
+    return (
     <div className="admin-container">
-      
-        <h1>📊 Información General</h1>        
-      
+      <h1>📊 Información General</h1>
 
       <section className="info-content">
+        {/* Card Usuarios */}
         <div className="info-users-card">
-          <div className="info-users-icon">👤</div>
-          <div className="info-users-details">
-           <Link to="/admin/users"><h3>Usuarios</h3></Link>
-            <p>{users.length}</p>
-          </div>
+          <Link to="/admin/users" className="admin-link">
+            <div className="info-users-icon">👤</div>
+            <div className="info-users-details">
+              <h3>Usuarios</h3>
+            </div>
+          </Link>
+          <p>{users.length}</p>
         </div>
 
+        {/* Card Películas */}
         <div className="info-movies-card">
-          <div className="info-movies-icon">🎬</div>
-          <div className="info-movies-details">
-            <Link to="/admin/movies"><h3>Películas</h3></Link>
-            <p>{movies.length}</p>
-          </div>
+          <Link to="/admin/movies" className="admin-link">
+            <div className="info-movies-icon">🎬</div>
+            <div className="info-movies-details">
+              <h3>Películas</h3>
+            </div>
+          </Link>
+          <p>{movies.length}</p>
         </div>
 
-        {/* Nueva Card: Ejemplo de filtro rápido */}
+        {/* Card Administradores */}
         <div className="info-admins-card">
-          <div className="info-admins-icon">🛡️</div>
-          <div className="info-admins-details">
-            <Link to="/admin/admins">
+          <Link to="/admin/admins" className="admin-link">
+            <div className="info-admins-icon">🛡️</div>
+            <div className="info-admins-details">
               <h3>Administradores</h3>
-            </Link>
-            <p>{users.filter(u => u.role === 'admin').length}</p>
-          </div>
+            </div>
+          </Link>
+          <p>{users.filter(u => u.role === 'admin').length}</p>
         </div>
       </section>
-
-     
     </div>
   );
 }

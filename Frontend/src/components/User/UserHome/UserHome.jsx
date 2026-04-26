@@ -70,6 +70,13 @@ export default function UserHome(){
           placeholder='🔍 Buscar película por su título original'
           value = {searchMovie}
           onChange = {(e) => setSearchMovie(e.target.value)}
+        //  Usamos onBlur para limpiar el input después de mostrar los resultados,
+        // se activa cuando el input pierda el foco: cuando usario haga click fuera del input o resultados de búsqueda.
+          onBlur = {() => {
+            setTimeout(() => {
+              setSearchMovie('');
+            }, 200);
+          }}
         />
         {searchMovie !== '' && (
           <div className='search-result-div'>
