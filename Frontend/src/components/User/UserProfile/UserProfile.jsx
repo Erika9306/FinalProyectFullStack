@@ -1,40 +1,27 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useContext } from 'react';
 import Swal from 'sweetalert2';
-import { jwtDecode } from "jwt-decode";
 import { useForm } from 'react-hook-form';
-import {Button} from '../../Button/Button'
+import { useNavigate } from 'react-router-dom'; 
+import { Button } from '../../Button/Button';
+import { AuthContext } from "../../../context/AuthContext.jsx";
+import { requesAPI } from '../../../services/api.js';
 import "./UserProfile.css";
 
-
 export const UserProfile = () => {
-    const URL = "https://finalproyectfullstack.onrender.com";
-
     const [user, setUser] = useState(null);
-    const [editAccount, setEditAccount]= useState(false);     
-    const {register, handleSubmit, setValue, reset} = useForm();     
-    const token = localStorage.getItem('token');
-    const userId = jwtDecode(token)._id;
-
+    const [editAccount, setEditAccount] = useState(false);     
+    const { register, handleSubmit, setValue, reset } = useForm();     
+    const { token, userId } = useContext(AuthContext);
+    const navigate = useNavigate();
     useEffect(()=>{
      
         const userInfo = async () => {
-            try {
-                
-                const response = await fetch(`${URL}/api/v1/user/${userId}`, {
-                    method: "GET",
-                    headers: {
-                        "Authorization": `Bearer ${token}` 
-                    }
-                });
-                const result = await response.json();
-
-                if (response.ok) {
-                    console.log("datos de usuario", result);
+            try {                
+                const result = await requesAPI(`/user/${userId}`);
                     setUser(result);
                     //setvalue ayudará que al terminar fetch el usuario vea sus datos actuales que estan en el DB
-                    setValue('name', result.name);
-                      
-                }
+                    setValue('name', result.name);                     
+                
             } catch (error) {
                 console.error("Error al obtener info", error);
             }
@@ -56,14 +43,11 @@ export const UserProfile = () => {
             }
             //comprobamos que usuario suba imagen de Pc, si no, se mantieen la url antigua
         if(userData.imgFile && userData.imgFile.length > 0){
-            picture.append("img", userData.imgFile[0]);
-        // }else{
-        // //si el usuario no sube imagen, se mantiene la antigua url
-        // picture.append("img", userData.imgUrl);
+            picture.append("img", userData.imgFile[0]);        
          }
     
         try {
-            const response = await fetch(`${URL}/api/v1/user/${userId}`, {
+            const response = await fetch(`${URL}/user/${userId}`, {
                 method: "PUT",
                 headers: {
                     "Authorization": `Bearer ${token}`,
@@ -102,23 +86,18 @@ export const UserProfile = () => {
 
         if (result.isConfirmed) {
             try {
-                const response = await fetch(`${URL}/api/v1/user/${userId}`, {
-                    method: "DELETE",
-                    headers: {
-                        "Authorization": `Bearer ${token}` 
-                    }
-                });
+                const response = await requesAPI(`/user/${userId}`, 'DELETE');
                 if (response.ok) {
                     localStorage.removeItem('token');
                     localStorage.clear();
                     await Swal.fire('Eliminado', 'Tu cuenta ya no existe', 'success');
-                    window.location.href = "/login"; 
+                    navigate("/login");
                 }
             } catch (error) {
                 console.log("Error al borrar", error);
             }
         }
-    },[token, userId]);
+    },[ userId, navigate]);
 
     if(!user){
         return <div> Cargando datos...</div>

@@ -3,11 +3,12 @@ import { useParams } from 'react-router-dom';
 import { UserFavourite } from '../UserFavourite/UserFavourite';
 import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
+import { requesAPI } from '../../../services/api.js';
 import './MovieDetail.css'
 
 
-export default function MovieDetail() { 
-  const URL = "https://finalproyectfullstack.onrender.com";
+export default function MovieDetail() {
+  
   const [movie, setMovie] = useState(null);
   const [selected, setSelected] = useState(false);
 
@@ -16,42 +17,22 @@ export default function MovieDetail() {
   const {id} = useParams();
 
   useEffect(() => {
+
     const movieSelected = async()=>{
-      const response = await fetch(`${URL}/api/v1/movies/${id}`, {
-          method: "GET",
-          headers: {
-            "Authorization": `Bearer ${localStorage.getItem('token')}`,
-            "Content-Type": "application/json"
-          }
-        });
-      const result = await response.json();
-      //console.log(result);
+      const result = await requesAPI(`/movies/${id}`);     
       setMovie(result);
     };
     movieSelected(id);
     },[id]);
 
     
-  const favouriteMovie = useCallback(async()=>{
-    const token = localStorage.getItem('token');
-
-  //sacamos usuario decodificando token y alli aparece _id
-  const userId = jwtDecode(token)._id;
-  const response = await fetch(`${URL}/api/v1/list/add/${id}`,{
-    method: "POST",
-      headers:{
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({userId: userId})      
-    });
-
-    if (response.ok) {
-      setSelected(true);
-      Swal.fire("¡Guardada!", "Película añadida al ❤️", "success");
-    } else {
-      Swal.fire("Error", "No se pudo guardar, intenta más tarde", "error");
-  }
+    const favouriteMovie = useCallback(async()=>{
+      const token = localStorage.getItem('token');
+    //sacamos usuario decodificando token y alli aparece _id
+    const userId = jwtDecode(token)._id;
+    await requesAPI(`/list/add/${id}`, 'POST');    
+        setSelected(true);
+        Swal.fire("¡Guardada!", "Película guardada en el historial", "success");   
 
   },[id]);
 

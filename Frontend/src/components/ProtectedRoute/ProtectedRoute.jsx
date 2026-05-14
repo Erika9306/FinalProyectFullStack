@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import { Navigate } from "react-router-dom";
 import { isTokenValid } from "../../utils/isTokenValid";
 import { AuthContext } from "../../context/AuthContext.jsx";
@@ -10,9 +10,15 @@ export default function ProtectedRoute({ requiredRole,  children }) {
   //obtenemos token, rol y logout desde props childen del contexto
   const { token, role, logout } = useContext(AuthContext);
   const validToken = isTokenValid(token);
+  useEffect(() => {
+    // Verificar el token antes de visualizar el componente
+    if (!validToken) {
+      logout(); 
+    }
+  }, [validToken, logout]);
+
   if (!validToken) {
-    // Limpia el estado y el localStorage, función definida en el contexto
-    logout(); 
+    // Si el token no es válido, redirige al login    
     return <Navigate to="/login" replace />;
   }
 

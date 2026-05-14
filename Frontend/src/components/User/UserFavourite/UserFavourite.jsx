@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { jwtDecode } from 'jwt-decode';
+import React, { useEffect, useState , useContext} from 'react';
 import Swal from 'sweetalert2';
+import { AuthContext } from "../../../context/AuthContext.jsx";
+import { requesAPI } from '../../../services/api.js';
 import "./UserFavourite.css";
 
 export const UserFavourite = () => {   
-    const URL = "https://finalproyectfullstack.onrender.com"; 
-    const token = localStorage.getItem('token');
 
-    //sacamos usuario decodificando token y alli aparece _id
-    const userId = jwtDecode(token)._id;
-
-    //console.log("token decoded, user id", userId);
+    const {token, userId} = useContext(AuthContext);
     const [moviesSaved , setMoviesSaved] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -18,25 +14,15 @@ export const UserFavourite = () => {
         const savedMovie =async()=>{
             setLoading(true);
             try{
-            const response = await fetch(`${URL}/api/v1/list/favourites/${userId}`,{
-                method: "GET",
-                headers:{
-                    "Authorization": `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                }
-            });
-
-            if(!response.ok){
-                console.log("No se puede extraer películas favoritas", response);
-            }
-
-            const result = await response.json();
-            console.log("resultado películas favoritas", result);
-            setMoviesSaved(result.movies ?? []);
-            setLoading(false);           
+                const result= await requesAPI(`/list/favourites/${userId}`, 'GET', null, token);
+                console.log("resultado películas vistas", result);
+                setMoviesSaved(result.movies ?? []);
+                setLoading(false);           
                 
-            }catch(error){
-                console.log("error al descargar películas favoritas", error);
+            }catch(error){                
+                console.log("error al cargar el historial", error);
+                Swal.fire("Error", "No se ha podido cargar el historial. Inténtalo más tarde.", "error");
+                setLoading(false);
             }};
 
             if(userId){

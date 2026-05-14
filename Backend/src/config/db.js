@@ -3,7 +3,7 @@ const User = require('../../src/api/models/User');
 
  const connectDB = async () => {
   try {
-    const urlDB = 'mongodb+srv://admin:123@cluster0.dtdw9s2.mongodb.net/MoviesLibrary?retryWrites=true&w=majority';
+    const urlDB = process.env.MONGO_URI;
 
     await mongoose.connect(urlDB);
     console.log(' Connected to MongoDB');

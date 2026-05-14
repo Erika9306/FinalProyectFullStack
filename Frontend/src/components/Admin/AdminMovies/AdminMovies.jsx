@@ -1,13 +1,14 @@
-import React, { useMemo,useCallback, useEffect, useState, use } from 'react';
+import React, { useMemo,useCallback, useEffect, useState} from 'react';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import "./AdminMovies.css";
 import { Button } from '../../../components/Button/Button';
+import { requesAPI } from '../../../services/api.js';
 
 
 //usamos React.memo para memorizar el componente y evitar renders innecesarios
 export const AdminMovies = React.memo(() => {
-  const URL = "https://finalproyectfullstack.onrender.com";
+  
   const [movies, setMovies] = useState([]);
   const [addMoviesForm, setAddMoviesForm] = useState(false);
   const [editMovieForm, setEditMovieForm] = useState(false);
@@ -21,18 +22,11 @@ export const AdminMovies = React.memo(() => {
   useEffect(() => {
     const listMovies = async () => {
       try{
-      const res = await fetch(`${URL}/api/v1/movies`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json"
-        }
-      });
-      const data = await res.json();      
+      const data = await requesAPI('/movies');     
       setMovies(data || []);
-
     }catch(error){
       console.log('No se puede cargar lista de peliculas', error);
+      Swal.fire("Error", "No se pudo cargar la lista de películas, intenta de nuevo más tarde", "error");
     }
     };
 
@@ -43,20 +37,13 @@ export const AdminMovies = React.memo(() => {
 useEffect(()=>{
   const categoriesList = async ()=>{
     try{
-    const result = await fetch(`${URL}/api/v1/categories`, {
-      method: "GET",
-      headers:{
-        "Authorization" : `Bearer ${localStorage.getItem('token')}`,
-        "Content-Type": "application/json"  
-       }
-      });
-      const data = await result.json();
-
+      const data = await requesAPI('/categories');
       //setCategories guardamos los datosy luego en el formulario
       //usamos categories para dibujarlos
       setCategories(data);
   }catch(error){
     console.log("No se pudo cargar categorias", error);
+    Swal.fire("Error", "No se pudo cargar las categorías, intenta de nuevo más tarde", "error");
   }
     };
 categoriesList();
@@ -69,32 +56,15 @@ categoriesList();
  const createMovie = useCallback(async (data)=>{
   try{
   setSearchMovie('');
-  const response = await fetch(`${URL}/api/v1/movies`, {
-    method: "POST",
-        headers:{
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data),
-      },      
-    );
-    const result = await response.json();    
-    console.log('Movies', result);
-
-    if(!response.ok){
-      console.log('Error en crear movies');
-      Swal.fire("Error", "Error al crear la película", "error");
-      return;
-    }
+    const result = await requesAPI('/movies', 'POST', data);   
     const movieCat = categories.find(c => c._id === data.category); 
 
     //copiamos lo que no cambio y asignamos al category valores de movieCat
     const mCategory = {...result, category: movieCat};
 
     //añadimos la película a la lista de las pelis con SetMovies, asi no tenemos que añadir dependecia
-
     setMovies(prev => [...prev, mCategory]);
-    Swal.fire("Ëxito!", "Película agregada al catálogo!", "success");
+    Swal.fire("Éxito!", "Película agregada al catálogo!", "success");
     setAddMoviesForm(false);
     reset();
 
@@ -116,24 +86,16 @@ const retrieveMovieInfo = useCallback((movie) =>{
     if(!editMovie){
       return;
     }
-
     try{
-      const response = await fetch(`${URL}/api/v1/movies/${editMovie._id}`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(editMovie)
-    });
-
-    if(!response.ok){
-      console.log("Error al editar película")
-    }
+      const response = await requesAPI(`/movies/${editMovie._id}`, 'PUT', editMovie);
+      if(!response.ok){
+        console.log("Error al editar película");        
+      }
+    
     const categoryId = editMovie.category?._id || editMovie.category;
-    console.log('Category ID:', categoryId, typeof categoryId);
     const categoria = categories.find(c=> String(c._id) === String(categoryId));
-    //si cateogria cambio ,entocnes la inyectamso como el cambio de la info de pelis
+    
+    //si cateogria cambio ,entonces la inyectamos como el cambio de la info de pelis
     const updateMovie ={
       ...editMovie, 
       category: categoria || { title: "Sin categoría"}
@@ -141,11 +103,11 @@ const retrieveMovieInfo = useCallback((movie) =>{
 
     setMovies(prev => prev.map(m => m._id === editMovie._id? updateMovie : m));
     setEditMovieForm(false);
-
     Swal.fire("Actualizada", "Película actualizada correctamente", "success");
+  
   }catch(error){
     console.log(error);
-     Swal.fire("Error", "Error al editar la peli", "error");
+     Swal.fire("Error", "Error al editar la película", "error");
      return;
   }
   }, [editMovie,categories]);
@@ -159,11 +121,11 @@ const retrieveMovieInfo = useCallback((movie) =>{
     html: `
       <div style="text-align: left; color: black;">
         <img src="${movie.imgUrl}" alt="${movie.title}" style="width: 80%; border-radius: 10px; margin-bottom: 15px;">
-        <p style="color: #333333;"><strong>Categoría:</strong> ${movie.category?.title}</p>        
-        <p style="color: #333333;"><strong>Director:</strong> ${movie.director}</p>
-        <p style="color: #333333;"><strong>Año:</strong> ${movie.year}</p>
-        <p style="color: #333333;"><strong>Sinopsis:</strong> ${movie.sinopsis}</p>
-        <p style="color: #333333;"><strong>Disponible desde:</strong> ${new Date(movie.available).toLocaleDateString()}</p>
+        <p style="color: #1F1F1F;"><strong>Categoría:</strong> ${movie.category?.title}</p>        
+        <p style="color: #1F1F1F;"><strong>Director:</strong> ${movie.director}</p>
+        <p style="color: #1F1F1F;"><strong>Año:</strong> ${movie.year}</p>
+        <p style="color: #1F1F1F;"><strong>Sinopsis:</strong> ${movie.sinopsis}</p>
+        <p style="color: #1F1F1F;"><strong>Disponible desde:</strong> ${new Date(movie.available).toLocaleDateString()}</p>
       </div>
     `,
     showCloseButton: true,
@@ -188,14 +150,11 @@ const deleteMovie = useCallback(async(movie)=>{
     if(!result.isConfirmed){
       return;
     }
-  const response = await fetch(`${URL}/api/v1/movies/${movie._id}`,{
-    method:"DELETE",
-    headers:{
-      "Authorization": `Bearer ${localStorage.getItem('token')}`,
-      "Content-Type": "application/json"
+  const response = await requesAPI(`/movies/${movie._id}`, 'DELETE');
+  if(!response.ok){
+    console.log("Error al borrar película");
     }
-  });
-
+  
   if(response.ok){
     setMovies(prev => prev.filter(p => p._id !== movie._id));
      Swal.fire('Eliminada', `La película ${movie.title} ha sido eliminada correctamente`, 'success');

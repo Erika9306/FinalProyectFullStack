@@ -14,7 +14,6 @@
   background-color: var(--text-color); 
 }
 
-
 .login-form {
   background: var(--text-color); 
   padding: 2rem;
@@ -38,6 +37,15 @@
   background-color: var(--text-color);
   
 }
+
+.login-form label {
+  display: flex;
+  flex-direction: column;
+  margin: 0.8rem;
+  color: var(--secondary-color);
+  background-color: var(--text-color);
+  font-size: 1rem;
+}
 .login-form input{
   padding: 0.8rem 1rem;
   margin-top: 0.5rem;
@@ -48,25 +56,17 @@
   transition: border-color 0.3s ease;
   background:var(--primary-color);
 }
-.login-form input::placeholder {
-  color: var(--secondary-color) !important;
-  opacity: 0.6;
-}
-.login-form label {
-  display: flex;
-  flex-direction: column;
-  margin: 0.8rem;
-  color: var(--secondary-color);
-  background-color: var(--text-color);
-  font-size: 1rem;
-}
-
 .login-form input:focus {
   outline: none;
   border-color: var(--main-color); 
   color: var(--secondary-color) !important; 
   background: var(--primary-color); 
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.1); 
+  
+}
+.login-form input::placeholder {
+  color: var(--secondary-color) !important;
+  opacity: 0.6;
 }
 
 .login-form button {

@@ -35,7 +35,14 @@
   }
   
 .register-form input{
+  padding: 0.8rem 1rem;
+  margin-top: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);  
   color: var(--secondary-color) !important;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  background:var(--primary-color);
 }
 .register-form input::placeholder {
   color: var(--secondary-color) !important;
@@ -68,6 +75,10 @@
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
   color: var(--secondary-color) !important; 
 }
+.register-form input::placeholder {
+  color: var(--secondary-color) !important;
+  opacity: 0.6;
+}
 .register-form button {
   margin-top: 1rem;
   margin-bottom: 0.5rem;
@@ -82,12 +93,10 @@
   transition: transform 0.2s, opacity 0.2s;
 }
 
-
 .register-form button:hover {
   transform: translateY(-2px);
   opacity: 0.9;
 }
-
 
 /* enlace para login*/
 .register-meta {

@@ -43,6 +43,8 @@ const postMovie = async(req,res,next) =>{
         return res.status(400).json({message: "Title and categories are required"});
     }
  //cuando qiere subir portada de un pelicula desde su ordenador, aunque normalmente será un link de img
+    let image;
+    
     if(req.file){
         image = req.file.path;
     }else if(imgUrl){

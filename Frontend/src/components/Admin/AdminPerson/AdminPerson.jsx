@@ -1,26 +1,24 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Swal from 'sweetalert2';
 import { Button } from '../../Button/Button'; 
+import { requesAPI } from '../../../Services/api';
 import "./AdminPerson.css";
 
-export const AdminPerson = React.memo(() => {
-  const URL = "https://finalproyectfullstack.onrender.com"; 
+export const AdminPerson = React.memo(() => {   
   const [admin, setAdmin] = useState([]); 
   const [editUser, setEditUser] = useState(null);
   const [editAdminForm, setEditAdminForm] = useState(false); 
 
   useEffect(() => {
     const listAdmins = async () => {
-      const res = await fetch(`${URL}/api/v1/user`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json"
-        }
-      });
-      const data = await res.json();     
+      try{
+        const data = await requesAPI('/user');     
       const admins = data.filter(user => user.role === 'admin');
       setAdmin(admins);
+      }catch(error){
+        console.log("Error al cargar administradores", error);
+        Swal.fire("Error", "No se pudieron cargar los administradores", "error");
+      }
     };
     listAdmins();
   }, []);
@@ -34,27 +32,18 @@ export const AdminPerson = React.memo(() => {
     e.preventDefault();
     if(!editUser) return;
     try{
-      const response = await fetch(`${URL}/api/v1/user/${editUser._id}`,{
-        method: "PUT",
-        headers:{
-          "Authorization": `Bearer ${localStorage.getItem('token')}`,
-          "Content-Type": "application/json"          
-        }, 
-        body: JSON.stringify(editUser)
+      const response = await requesAPI(`/user/${editUser._id}`, 'PUT', editUser);             
+      setAdmin(previous =>
+        {if(editUser.role !=='admin'){
+          return previous.filter(u => u._id !== editUser._id);
+        }
+        previous.map(u => u._id === editUser._id ? editUser : u)
       });
-      if(response.ok){
-        
-        setAdmin(previous =>
-         {if(editUser.role !=='admin'){
-            return previous.filter(u => u._id !== editUser._id);
-         }
-         previous.map(u => u._id === editUser._id ? editUser : u)
-        });
-        setEditAdminForm(false);
-        Swal.fire("¡Éxito!", `Admin ${editUser.name} actualizado`, "success");
-      }
+      setEditAdminForm(false);
+      Swal.fire("¡Éxito!", `Administrador ${editUser.name} actualizado`, "success");      
     }catch(error){
-      Swal.fire("Error", "Error al editar", "error", error);
+      console.log("Error al editar los datos del administrador", error);
+      Swal.fire("Error", "Error al editar los datos del administrador", "error", error);
     }
   }, [editUser]);
          
@@ -69,20 +58,14 @@ export const AdminPerson = React.memo(() => {
       });
       
       if (!result.isConfirmed) return;
-      const response = await fetch(`${URL}/api/v1/user/${user._id}`,{
-         method: "DELETE",
-         headers:{
-          "Authorization": `Bearer ${localStorage.getItem('token')}`, 
-          "Content-Type": "application/json"        
-         }      
-      });
-
+      const response = await requesAPI(`/user/${user._id}`, 'DELETE');
       if(response.ok){        
         setAdmin(prev => prev.filter(u => u._id !== user._id));
         Swal.fire('Eliminado', `Administrador ${user.name} eliminado`, 'success');
       }
     } catch(error) {
       console.log("No se puede borrar", error);
+      Swal.fire("Error", "No se pudo eliminar el administrador", "error");
     }
   }, []);
 

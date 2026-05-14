@@ -1,21 +1,20 @@
 import React, {useContext} from "react";
-import { useNavigate } from "react-router-dom";
-import {  useForm } from "react-hook-form";
+import { useNavigate, Link} from "react-router-dom";
+import { useForm } from "react-hook-form";
 import {jwtDecode} from "jwt-decode";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthContext.jsx";
+import { requesAPI } from '../../services/api.js';
 import "./Login.css";
 
 export default function Login() {
-  const {login} = useContext(AuthContext);
-  const URL = "https://finalproyectfullstack.onrender.com";
+  const {login} = useContext(AuthContext); 
   const navigate = useNavigate();
   const {
     register,    
        //handleSubmit ya valorará el input y llamará a onSubmit si todo es correcto
        //no hace falta useState con react-hook-form, además hace e.preventDefault()automáticamente
-    handleSubmit,
-    setError,
+    handleSubmit,    
     formState:{ errors }
   } = useForm();
   
@@ -23,26 +22,9 @@ export default function Login() {
     try {
 
       //mandamos petición al backend mandando la info de usuario
-      const response = await fetch(`${URL}/api/v1/user/login`, {
-        method: "POST",
-        headers: { 
-          "Content-Type": "application/json" 
-        },
-        body: JSON.stringify(data),
-      });
-
-      //si todo correcto, el result es el token genrado en el Backend 
-      const result = await response.json();
+      const result = await requesAPI('/user/login', 'POST', data);
       console.log("Respuesta Login:", result);
-
-      if (!response.ok) { 
-        setError("email", { message: "Email o contraseña incorrectos" });
-              
-        Swal.fire("Email o contraseña incorrectos");
-        return;
-      }
-
-      // Decodificar token
+     
       const decoded = jwtDecode(result.token);
 
       // usamos login definido en el contexto para guardar el token y el rol en el estado global y localStorage
@@ -86,7 +68,7 @@ export default function Login() {
         <button type="submit">Entrar</button>
 
         <div className="login-meta">
-          <a onClick={()=>navigate("/register")}>¿No tienes cuenta? Crear cuenta</a>
+          <Link to ="/register">¿No tienes cuenta? Crear cuenta</Link>
         </div>
       </form>
     </div>

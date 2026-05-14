@@ -5,8 +5,10 @@ import {Logout} from "../../Logout/Logout.jsx";
 
 
 
-export default function AdminNavbar({setToken, setRole}) {
- 
+
+export default function AdminNavbar() {
+  
+
   return (
     <div className="navbar">
     <nav >      
@@ -16,7 +18,7 @@ export default function AdminNavbar({setToken, setRole}) {
         <li><Link to="/admin/movies" >🎬</Link></li>
        
       </ul>
-      <Logout setToken={setToken} setRole={setRole}/>
+      <Logout/>
     </nav>
     </div>
   );

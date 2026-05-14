@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext} from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../context/AuthContext.jsx";
+import { requesAPI } from '../../../services/api.js';
 import "./AdminHome.css";
 
 export default function AdminHome() {
-  const URL = "https://finalproyectfullstack.onrender.com";
+
   const [users, setUsers] = useState([]);
   const [movies, setMovies] = useState([]);
- 
+  const { token, logout } = useContext(AuthContext); 
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem("token");
       
       if (!token) {
         console.warn("No hay token guardado.");       
@@ -18,36 +19,21 @@ export default function AdminHome() {
       }
 
       try {
-        const [userRes, movieRes] = await Promise.all([
-          fetch(`${URL}/api/v1/user`, {
-            method: "GET",
-            headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-          }),
-          fetch(`${URL}/api/v1/movies`, {
-            method:"GET",
-            headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-          }),
+        const [userData, movieData] = await Promise.all([
+          requesAPI('/user'),
+          requesAPI('/movies')
         ]);
-
-        if (!userRes.ok || !movieRes.ok) {
-          console.error("Token inválido o expirado", userRes.status, movieRes.status);
-          localStorage.clear();
-          window.location.href = "/login";
-          return;
-        }
-
-        const userData = await userRes.json();
-        const movieData = await movieRes.json();
-
+        
         setUsers(userData?? []);
         setMovies(movieData?? []);
       } catch (err) {
         console.error("Error cargando Admin dashboard:", err);
+        logout();
       } 
     };
 
     fetchData();
-  }, []);
+  }, [token, logout]);
 
     return (
     <div className="admin-container">

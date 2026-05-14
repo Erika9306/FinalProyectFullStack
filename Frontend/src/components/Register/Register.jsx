@@ -1,15 +1,15 @@
 import React, {useContext} from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {  useForm } from "react-hook-form";
 import {jwtDecode} from "jwt-decode";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthContext.jsx";
+import { requesAPI } from '../../services/api.js';
 import "./Register.css";
 
 
 export default function Register() {
-  const {login} = useContext(AuthContext);
-  const URL = "https://finalproyectfullstack.onrender.com";
+  const {login} = useContext(AuthContext);  
   const navigate = useNavigate();
   //React Form Hook
   const {register,
@@ -20,48 +20,36 @@ export default function Register() {
   const onRegister = async (data)=>{
     try {
       
-      const response = await fetch(`${URL}/api/v1/user/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({          
-          name: data.name,
-          email: data.email,
-          password: data.password,
-           }),
-      });
-      const result = await response.json();
-      console.log("Respuesta de registro:", result);
-
-      if (!response.ok) {
-        if(result.message === "User already exists"){
-          setError("email", { message: "Usuario ya existe" });
-          Swal.fire("Usuario ya existe");
-          return;
-        }else{
-          setError("email", { message: result.message || "Error al registrarse" });
-          Swal.fire(result.message || "Error al registrarse");
-          console.log("Error al registrarse", result);
-        return;
-      }
-    }
+      const response = await requesAPI('/user/register', 'POST',{
+        name: data.name,
+        email: data.email,
+        password: data.password
+       });      
+     
       if(response.ok){
-        localStorage.setItem("token",result.token);           
+        localStorage.setItem("token",response.token);           
       }
-      const decoded = jwtDecode(result.token);
+      const decoded = jwtDecode(response.token);
 
       // Guardar token en localStorage
-      login(result.token, decoded.role, decoded._id)         
+      login(response.token, decoded.role, decoded._id)         
 
       // Redirigir según el rol con pequeño delay para asegurar que el token se guarde antes de redirigir
       setTimeout(() => {
         navigate(decoded.role === "admin" ? "/admin/home" : "/user/home");
       }, 200);
 
-    } catch (error) {
+    }catch (error) {
       console.error("error al registrarse:", error);
+      if (error.message === "User already exists") {
+      setError("email", { message: "Usuario ya existe" });
+      Swal.fire("Usuario existente", "Ya existe una cuenta con este email. Intenta iniciar sesión.", "info");
+    } else {
+      setError("email", { message: "No se pudo completar el registro" });
+      Swal.fire("Error", "Hubo un problema al registrarte. Inténtalo de nuevo más tarde.", "error");
     }
+  }
+    
   };
 
   return (
@@ -81,7 +69,7 @@ export default function Register() {
          <label>
           Nombre Completo
           <input
-            type="string"            
+            type="text"            
             placeholder="Nombre Completo"
             {...register('name',{required:"Nombre Completo es obligatorio!", maxLength: 100})}
           />
@@ -107,7 +95,7 @@ export default function Register() {
         <button type="submit">Registrarse</button>
 
         <div className="register-meta">
-          <a onClick={()=> navigate("/login")}>¿Ya tienes cuenta? </a>
+          <Link to="/login">¿Ya tienes cuenta? Iniciar sesión</Link>
         </div>
       </form>
     </div>

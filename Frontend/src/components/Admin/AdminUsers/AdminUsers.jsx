@@ -3,31 +3,21 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import "./AdminUsers.css";
 import{ Button } from '../../Button/Button';
+import { requesAPI } from '../../../services/api.js';
 
 
 
 //usamos React.memo para memorizar el componente y evitar renders innecesarios
-export const AdminUsers = React.memo(() => {
-  const URL = "https://finalproyectfullstack.onrender.com";
+export const AdminUsers = React.memo(() => {  
   const [users, setUsers] = useState([]);
   const [addUserForm, setAddUserForm] = useState (false);
   const [editUserForm, setEditUserForm]= useState(false);
   const [editUser, setEditUser] = useState(null); 
-  const [searchUser, setSearchUser] = useState('');
-
-  
+  const [searchUser, setSearchUser] = useState('');  
   
   useEffect(() => {
     const listUsers = async () => {
-      const res = await fetch(`${URL}/api/v1/user`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json"
-        }
-      });
-
-      const data = await res.json();     
+      const data = await requesAPI('/user');    
       setUsers(data || []);
     };
 
@@ -43,31 +33,14 @@ export const AdminUsers = React.memo(() => {
   const createUser = useCallback(async (data) =>{
     try{
       setSearchUser('');
-      const response = await fetch(`${URL}/api/v1/user/register`, {
-        method: "POST",
-        headers:{
-          "Authorization": `Bearer ${localStorage.getItem('token')}`,
-          "Content-Type":"application/json"
-        },        
-          body: JSON.stringify(data),
-        });      
-      const result = await response.json();
-      console.log("Usuario creado por admin", response);
-
-      if(!response.ok){
-
-        console.log("Error al crear usuario", response);
-        Swal.fire("Error","Error al crear usuario", "error");
-        return;
-      }
+      const response = await requesAPI('/user/register', 'POST', data);      
       //añadir el nuevo usuario a la lista
-      setUsers(prev => [...prev, result]);
+      setUsers(prev => [...prev, response]);
 
       Swal.fire("Creado","Usuario creado correctamente", "success");
         reset(); 
         setAddUserForm(false);
   }catch(error){
-
       console.error("Error al crear usuario:", error);
       Swal.fire("Error en el servidor. Inténtalo de nuevo más tarde.");
       return;
@@ -89,30 +62,15 @@ export const AdminUsers = React.memo(() => {
     setSearchUser('');
     if(!editUser) return;
     try{
-      const response = await fetch(`${URL}/api/v1/user/${editUser._id}`,{
-        method: "PUT",
-        headers:{
-          "Authorization": `Bearer ${localStorage.getItem('token')}`,
-          "Content-Type": "application/json"          
-          }, 
-          // fusionamos los datos nuevos con antiguos
-          body: JSON.stringify(editUser)
-        }
-      );
-      if(response.ok){
-       
-        setUsers(previous => previous.map(u => u._id === editUser._id? editUser: u));
-        setEditUserForm(false);
-        
+        const updatedUser = await requesAPI(`/user/${editUser._id}`, 'PUT', editUser);             
+        setUsers(previous => previous.map(u => u._id === editUser._id? updatedUser: u));
+        setEditUserForm(false);        
          Swal.fire("Exito!", `Usuario ${editUser.name} actualizado correctamente`, "success");
-      }else{
-        Swal.fire(`Error, Ne su pudo actualizar el perifl de usuario ${editUser.name}`);
-      }
+            
     }catch(error){
       console.log(error);
       Swal.fire("Error", "Error al editar", "error");
       return;
-
     }
   },
     [editUser]);
@@ -124,31 +82,31 @@ export const AdminUsers = React.memo(() => {
     setSearchUser('');
     const result = await Swal.fire({
       title: `¿Estás seguro que quieres eliminar ${user.name}?`,
+      text: "Esta acción no se puede deshacer",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
       confirmButtonColor: '#f33a19',
     });
-    
     if (!result.isConfirmed) return;
-    const response =  await fetch(`${URL}/api/v1/user/${user._id}`,{
-       method: "DELETE",
-       headers:{
-        "Authorization": `Bearer ${localStorage.getItem('token')}`, 
-       "Content-Type": "application/json"        
-       }      
-     });
-
-     console.log("Token enviado:", localStorage.getItem('token'));
-
-if(response.ok){
-  
-        //filtramos para que los que NO tienen el mismo id se queden sin borrar
+     await requesAPI(`/user/${user._id}`, 'DELETE');    
+      //filtramos para que los que NO tienen el mismo id se queden sin borrar
       setUsers(prev=> prev.filter(u=> u._id !== user._id));
-    Swal.fire('Eliminado', `Usuario ${user.name} eliminado correctamente`, 'success');
-}
+       Swal.fire({
+  title: "Eliminado",
+  text: "Usuario eliminado correctamente",
+  icon: "success",
+  confirmButtonText: "OK"
+});
+    
 }catch(error){
   console.log("No se puede borrar el usuario", error);
+  Swal.fire({
+    title: 'Error',
+    text: 'No se pudo eliminar el usuario',
+    icon: 'error'
+  });
 }
 
   }, []);
@@ -158,16 +116,8 @@ if(response.ok){
 
   const detailsUser = useCallback(async(user) => {   
     setSearchUser('');
-    const response = await fetch(`${URL}/api/v1/list/favourites/${user._id}`,{
-      method: "GET",
-      headers:{
-        "Authorization": `Bearer ${localStorage.getItem('token')}`,
-        "Content-Type": "application/json"        
-      }
-  });
-
-    const result = await response.json();
-    console.log('datos de peliculas vistas por usuario', result);
+    const result = await requesAPI(`/list/favourites/${user._id}`);
+    
     let moviesData = result.movies || [];
     //listmovie se guardará las pelicuasl vistoas pro el usuario
     let listMovie = '';
@@ -207,9 +157,9 @@ const search = useMemo(()=>{
     return [];
   }
   console.log('Buscando usuario', inputUser,searchUser);
-  return users.filter(u=> u.name.toLowerCase().trim().includes(inputUser));
+  return users.filter(u=> u?.name?.toLowerCase().trim().includes(inputUser));
   
-},[ users, searchUser]);
+},[ users, searchUser]);  
 //search, usamos ya la info que sacamso de Db
 //const search = users.filter(user => user.name.toLowerCase());
 

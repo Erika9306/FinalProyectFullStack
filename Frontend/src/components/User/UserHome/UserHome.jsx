@@ -1,42 +1,31 @@
-import React, {useMemo,useEffect, useState } from 'react';
+import React, {useMemo,useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./UserHome.css";
-import {Button} from '../../Button/Button'
+import {Button} from '../../Button/Button';
+import { AuthContext } from '../../../context/AuthContext';
+import { requesAPI } from '../../../services/api.js';
 
-export default function UserHome(){
-  const URL = "https://finalproyectfullstack.onrender.com";
+export default function UserHome(){  
   const [movies, setMovies] = useState([]); 
   const[searchMovie, setSearchMovie] = useState('');
-  const navigate = useNavigate();
- 
+  const navigate = useNavigate(); 
+  const {token, logout} = useContext(AuthContext);
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const token = localStorage.getItem("token");
-
       // Si no hay token, lo mandamos al login
-      if (!token) {
+      if(!token) {
+        logout();
         navigate("/login");
         return;
       }
-
       try {
-        const res = await fetch(`${URL}/api/v1/movies`, {
-          method: "GET",
-          headers: {
-            "Authorization": `Bearer ${token}`,
-            "Content-Type": "application/json"
-          }
-        });
-
-        if (res.status === 401) {
-          localStorage.clear();
+        const data = await requesAPI('/movies');
+        if (data.status === 401) {
+          logout();
           navigate("/login");
           return;
         }
-
-        const data= await res.json();
-       
         //Si backend devuelve null, por defecto aplicaremos un array vacío [] de películas.
         setMovies(data ?? []);
       } catch (error) {
@@ -44,7 +33,7 @@ export default function UserHome(){
       } 
     };
     fetchMovies();
-  }, [navigate]);
+  }, [token, logout, navigate]);
 
 
   const search = useMemo(()=>{
