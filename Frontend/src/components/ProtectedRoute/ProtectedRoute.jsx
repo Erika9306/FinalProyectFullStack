@@ -1,11 +1,18 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Navigate } from "react-router-dom";
 import { isTokenValid } from "../../utils/isTokenValid";
+import { AuthContext } from "../../context/AuthContext.jsx";
+import NavBar from "../User/NavBar/NavBar.jsx";
+import AdminNavbar from "../Admin/AdminNavbar/AdminNavbar.jsx";
 
-export default function ProtectedRoute({ requiredRole, token, role, children }) {
- const validToken = isTokenValid(token);
+export default function ProtectedRoute({ requiredRole,  children }) {
+  
+  //obtenemos token, rol y logout desde props childen del contexto
+  const { token, role, logout } = useContext(AuthContext);
+  const validToken = isTokenValid(token);
   if (!validToken) {
-    localStorage.clear();
+    // Limpia el estado y el localStorage, función definida en el contexto
+    logout(); 
     return <Navigate to="/login" replace />;
   }
 
@@ -15,6 +22,11 @@ export default function ProtectedRoute({ requiredRole, token, role, children }) 
     
   }
     
-//si todo está bien, lleva al componente correspondiente: admin o user
-  return children;
+//si todo está bien, lleva al componente correspondiente con su navbar correspondiente: admin o user
+  return (
+    <>
+      {role === "admin" ? <AdminNavbar /> : <NavBar />}
+      {children}
+    </>
+  )
 }

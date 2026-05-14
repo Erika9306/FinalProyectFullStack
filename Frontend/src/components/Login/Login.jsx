@@ -1,11 +1,13 @@
-import React from "react";
+import React, {useContext} from "react";
 import { useNavigate } from "react-router-dom";
-import { set, useForm } from "react-hook-form";
+import {  useForm } from "react-hook-form";
 import {jwtDecode} from "jwt-decode";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../context/AuthContext.jsx";
 import "./Login.css";
 
-export default function Login({setRole, setToken}) {
+export default function Login() {
+  const {login} = useContext(AuthContext);
   const URL = "https://finalproyectfullstack.onrender.com";
   const navigate = useNavigate();
   const {
@@ -43,12 +45,8 @@ export default function Login({setRole, setToken}) {
       // Decodificar token
       const decoded = jwtDecode(result.token);
 
-      // Guardar token en localStorage
-      localStorage.setItem("token", result.token);
-      localStorage.setItem("role", decoded.role);
-      localStorage.setItem("userId", decoded._id);
-      setToken(result.token);
-      setRole(decoded.role);           
+      // usamos login definido en el contexto para guardar el token y el rol en el estado global y localStorage
+      login(result.token, decoded.role, decoded._id);           
 
       // Redirigir según el rol
     navigate(decoded.role === "admin" ? "/admin/home" : "/user/home");

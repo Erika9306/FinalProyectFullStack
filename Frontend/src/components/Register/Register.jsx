@@ -1,12 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
 import { useNavigate } from "react-router-dom";
 import {  useForm } from "react-hook-form";
 import {jwtDecode} from "jwt-decode";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../context/AuthContext.jsx";
 import "./Register.css";
 
 
-export default function Register({setToken, setRole}) {
+export default function Register() {
+  const {login} = useContext(AuthContext);
   const URL = "https://finalproyectfullstack.onrender.com";
   const navigate = useNavigate();
   //React Form Hook
@@ -50,19 +52,15 @@ export default function Register({setToken, setRole}) {
       const decoded = jwtDecode(result.token);
 
       // Guardar token en localStorage
-      localStorage.setItem("token", result.token);
-      localStorage.setItem("role", decoded.role);
-      localStorage.setItem("userId", decoded._id);
-      setToken(result.token);
-      setRole(decoded.role);          
+      login(result.token, decoded.role, decoded._id)         
 
-      // Redirigir según el rol con peuqe;ño delay para asegurar que el token se guarde antes de redirigir
+      // Redirigir según el rol con pequeño delay para asegurar que el token se guarde antes de redirigir
       setTimeout(() => {
         navigate(decoded.role === "admin" ? "/admin/home" : "/user/home");
       }, 200);
 
     } catch (error) {
-      console.error("erroar al registrarse:", error);
+      console.error("error al registrarse:", error);
     }
   };
 
