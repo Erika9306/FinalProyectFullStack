@@ -51,7 +51,7 @@ export default function AdminHome() {
 
     return (
     <div className="admin-container">
-      <h1>📊 Información General</h1>
+      <h2>📊 Información General</h2>
 
       <section className="info-content">
         {/* Card Usuarios */}

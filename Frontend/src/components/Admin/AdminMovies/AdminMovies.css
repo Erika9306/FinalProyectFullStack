@@ -1,13 +1,9 @@
-.movies-table h2{
-  font-size: 1.5rem;
-  color: var(--main-color)!important;
-  margin-bottom: 1.7rem;
-}
+
 h3{
   font-size: 1.2rem;
   color: var(--secondary-color )!important;
   margin-bottom: 1.5rem;
-  margin-left: 0.2rem;
+  margin-left: 1rem;
 }
 
 h4{
@@ -20,6 +16,7 @@ input.search-movie {
   position: relative;
   width: 60%;
   margin-bottom: 2rem;
+  
   color: var(--text-text-color);
 }
 
@@ -28,7 +25,7 @@ input.search-movie {
   padding: 0.5rem ; 
   border-radius: 12px ;
   margin-bottom: 1rem ;
-  margin-left: 0.2rem ;
+  margin-left: 1.5rem;
   width: 60% ;
   color: var(--text-text-color) ;
   border: 1px solid var(--secondary-color) ;

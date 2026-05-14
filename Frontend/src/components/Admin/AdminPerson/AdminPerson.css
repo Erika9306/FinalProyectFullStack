@@ -7,7 +7,7 @@
 
 .admins-container h2 {
   font-size: 1.5rem;
-  color: var(--main-color)!important;
+  color: var(--secondary-title-color)!important;
   margin-bottom: 1.7rem;
 }
 

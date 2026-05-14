@@ -61,7 +61,7 @@ export default function UserHome(){
   return (
     <div className="user-home">      
       <header className="user-header">
-        <h1>🎬 Explora nuestro catálogo de películas</h1>  
+        <h2>🎬 Explora nuestro catálogo de películas</h2>  
       </header>
 
       <div className='search-movie'>

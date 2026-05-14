@@ -6,13 +6,11 @@
   font-family: var(--font-style);
 }
 
-.user-header {  
-  margin-bottom: 2rem;      
+.user-header  {  
+  margin-bottom: 2rem; 
+  color: var(--secondary-title-color) !important;    
 }
-.user-header h1{
-  font-size: 2rem;  
-  color: var(--secondary-color);
-}
+
 .search-movie{
   position:relative;
   margin-bottom: 1rem;

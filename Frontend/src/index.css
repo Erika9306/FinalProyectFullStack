@@ -5,7 +5,8 @@
     --text-color: #333333; 
     --text-text-color: #060606;
     --background-color-user: var(--primary-color);    
-    --background-color-admin: var(--primary-color)
+    --background-color-admin: var(--primary-color);
+    --secondary-title-color: white;
     --font-style: "Book Antiqua", serif;
     --box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); 
     --box-shadow-user: 0 8px 20px rgba(219, 219, 219, 0.3);   
@@ -54,3 +55,7 @@ input::placeholder {
     color: var(--text-text-color) !important;
    
 }
+h2{ 
+    color: var(--secondary-title-color) !important;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;}
