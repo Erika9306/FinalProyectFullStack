@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Swal from 'sweetalert2';
 import { Button } from '../../Button/Button'; 
-import { requesAPI } from '../../../Services/api';
+import { requesAPI } from '../../../services/api';
 import "./AdminPerson.css";
 
 export const AdminPerson = React.memo(() => {   
