@@ -18,10 +18,10 @@ h4{
 
 /*el buscador de user*/
 .search-user {
-  position: relative !important; /* Obligatorio para que top: 100% se calcule desde aquí */
+  position: relative !important;
   width: 80%; 
   margin-bottom: 2rem;
-  overflow: visible !important; /* 🚀 Fuerza a que se vea lo que sale de sus bordes */
+  overflow: visible !important; 
 }
 input.search-user {
   position: relative; 

@@ -42,7 +42,7 @@ export const UserFavourite = () => {
         <div>
             <h2>Historial de las Películas vistas</h2>
             {moviesSaved.length === 0 ? (
-                <div>🍿 No has visto ninguna película!</div>
+                <div className='no-views'>🍿 No has visto ninguna película!</div>
             ):(
                 <table className='favourite-table'>
                     <thead>
