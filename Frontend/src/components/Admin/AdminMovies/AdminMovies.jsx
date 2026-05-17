@@ -3,12 +3,11 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import "./AdminMovies.css";
 import { Button } from '../../../components/Button/Button';
-import { requesAPI } from '../../../services/api.js';
-
+import { useApi } from '../../../services/api.jsx';        
 
 //usamos React.memo para memorizar el componente y evitar renders innecesarios
 export const AdminMovies = React.memo(() => {
-  
+  const {requestAPI} = useApi();
   const [movies, setMovies] = useState([]);
   const [addMoviesForm, setAddMoviesForm] = useState(false);
   const [editMovieForm, setEditMovieForm] = useState(false);
@@ -22,7 +21,7 @@ export const AdminMovies = React.memo(() => {
   useEffect(() => {
     const listMovies = async () => {
       try{
-      const data = await requesAPI('/movies');     
+      const data = await requestAPI('/movies');     
       setMovies(data || []);
     }catch(error){
       console.log('No se puede cargar lista de peliculas', error);
@@ -31,13 +30,13 @@ export const AdminMovies = React.memo(() => {
     };
 
     listMovies();
-  }, []);
+  }, [requestAPI]);
 
   //usamos useEffect para sacar las categorias ya que ellas no van a cambiar
 useEffect(()=>{
   const categoriesList = async ()=>{
     try{
-      const data = await requesAPI('/categories');
+      const data = await requestAPI('/categories');
       //setCategories guardamos los datosy luego en el formulario
       //usamos categories para dibujarlos
       setCategories(data);
@@ -46,8 +45,8 @@ useEffect(()=>{
     Swal.fire("Error", "No se pudo cargar las categorías, intenta de nuevo más tarde", "error");
   }
     };
-categoriesList();
-},[]);
+  categoriesList();
+},[requestAPI ]);
 
 
  //CREAR PELÍCULA
@@ -56,7 +55,7 @@ categoriesList();
  const createMovie = useCallback(async (data)=>{
   try{
   setSearchMovie('');
-    const result = await requesAPI('/movies', 'POST', data);   
+    const result = await requestAPI('/movies', 'POST', data);   
     const movieCat = categories.find(c => c._id === data.category); 
 
     //copiamos lo que no cambio y asignamos al category valores de movieCat
@@ -72,7 +71,7 @@ categoriesList();
     console.log("Error creando película", error);
     Swal.fire("Error",'Upss... Algo va mal, intenta de nuevo más tarde',"error");
   }
- },[categories, reset]);
+ },[categories, reset, requestAPI]);
 
    //EDITAR PELÍCULA
 const retrieveMovieInfo = useCallback((movie) =>{
@@ -87,10 +86,7 @@ const retrieveMovieInfo = useCallback((movie) =>{
       return;
     }
     try{
-      const response = await requesAPI(`/movies/${editMovie._id}`, 'PUT', editMovie);
-      if(!response.ok){
-        console.log("Error al editar película");        
-      }
+      await requestAPI(`/movies/${editMovie._id}`, 'PUT', editMovie);      
     
     const categoryId = editMovie.category?._id || editMovie.category;
     const categoria = categories.find(c=> String(c._id) === String(categoryId));
@@ -110,7 +106,7 @@ const retrieveMovieInfo = useCallback((movie) =>{
      Swal.fire("Error", "Error al editar la película", "error");
      return;
   }
-  }, [editMovie,categories]);
+  }, [editMovie,categories, requestAPI]);
 
   //Detalle
   //no hace falta hacer fetch ya que toda la info tenemos el estado
@@ -150,10 +146,7 @@ const deleteMovie = useCallback(async(movie)=>{
     if(!result.isConfirmed){
       return;
     }
-  const response = await requesAPI(`/movies/${movie._id}`, 'DELETE');
-  if(!response.ok){
-    console.log("Error al borrar película");
-    }
+  const response = await requestAPI(`/movies/${movie._id}`, 'DELETE');
   
   if(response.ok){
     setMovies(prev => prev.filter(p => p._id !== movie._id));
@@ -162,7 +155,7 @@ const deleteMovie = useCallback(async(movie)=>{
   }catch(error){
     console.log("Error al borrar pelicula",error);
   }
-},[]);
+},[requestAPI ]);
 
 const search = useMemo(()=>{
   const inputMovie = searchMovie.toLowerCase().trim();
@@ -173,8 +166,7 @@ const search = useMemo(()=>{
   return movies.filter(m=> m.title.toLowerCase().trim().includes(inputMovie));
   
 },[ movies, searchMovie]);
-
-  
+ 
 
 
   return (

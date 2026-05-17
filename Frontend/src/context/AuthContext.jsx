@@ -54,15 +54,20 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     }, []);
   
-    if (loading) return <div>Cargando...</div>;
-
-    
+        
  //provider es el que da el contexto a toda la aplicación, 
  // y el value es lo que queremos compartir en toda la aplicación,
  // sin él no tendríamos esa información accesible
   return (
     <AuthContext.Provider value={{ token, role, userId, login, logout, loading }}>
-      {children}
+       {loading ? (
+        <div>
+          Cargando...
+        </div>
+      ) : (
+       children
+        )}
+    
     </AuthContext.Provider>
   );
 };

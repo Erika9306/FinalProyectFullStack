@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import "./UserHome.css";
 import {Button} from '../../Button/Button';
 import { AuthContext } from '../../../context/AuthContext';
-import { requesAPI } from '../../../services/api.js';
+import { useApi } from '../../../services/api.jsx'; 
 
 export default function UserHome(){  
+  const {requestAPI}  = useApi();
   const [movies, setMovies] = useState([]); 
   const[searchMovie, setSearchMovie] = useState('');
   const navigate = useNavigate(); 
@@ -20,7 +21,7 @@ export default function UserHome(){
         return;
       }
       try {
-        const data = await requesAPI('/movies');
+        const data = await requestAPI('/movies');
         if (data.status === 401) {
           logout();
           navigate("/login");
@@ -33,7 +34,7 @@ export default function UserHome(){
       } 
     };
     fetchMovies();
-  }, [token, logout, navigate]);
+  }, [token, logout, navigate , requestAPI]);
 
 
   const search = useMemo(()=>{

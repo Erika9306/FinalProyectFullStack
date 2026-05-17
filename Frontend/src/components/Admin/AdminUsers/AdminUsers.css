@@ -17,6 +17,12 @@ h4{
 }
 
 /*el buscador de user*/
+.search-user {
+  position: relative !important; /* Obligatorio para que top: 100% se calcule desde aquí */
+  width: 80%; 
+  margin-bottom: 2rem;
+  overflow: visible !important; /* 🚀 Fuerza a que se vea lo que sale de sus bordes */
+}
 input.search-user {
   position: relative; 
   width: 60%; 
@@ -38,7 +44,7 @@ input.search-user {
 
 }
 
-.search-result-div {
+.search-result-div-users {
   position: absolute;
   top: 100%; 
   left:0;
@@ -46,10 +52,10 @@ input.search-user {
   align-items: center;
   justify-content:space-between;
   gap:1rem;
-  background-color: var(--secondary-color);
+  background-color: white;
   border-radius: 12px;       
   margin-top: 1rem;  
-  z-index: 100;
+  z-index: 1000;
 }
 .search-item-row {
   display: flex;

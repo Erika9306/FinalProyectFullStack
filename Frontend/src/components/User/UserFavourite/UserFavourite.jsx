@@ -1,41 +1,42 @@
-import React, { useEffect, useState , useContext} from 'react';
+import React, { useEffect, useState , useContext, useCallback} from 'react';
 import Swal from 'sweetalert2';
 import { AuthContext } from "../../../context/AuthContext.jsx";
-import { requesAPI } from '../../../services/api.js';
+import { useApi } from '../../../services/api.jsx'; 
 import "./UserFavourite.css";
 
 export const UserFavourite = () => {   
-
+    const {requestAPI} = useApi();
     const {token, userId} = useContext(AuthContext);
     const [moviesSaved , setMoviesSaved] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const savedMovie =async()=>{
-            setLoading(true);
-            try{
-                const result= await requesAPI(`/list/favourites/${userId}`, 'GET', null, token);
-                console.log("resultado películas vistas", result);
-                setMoviesSaved(result.movies ?? []);
-                setLoading(false);           
-                
-            }catch(error){                
-                console.log("error al cargar el historial", error);
-                Swal.fire("Error", "No se ha podido cargar el historial. Inténtalo más tarde.", "error");
-                setLoading(false);
-            }};
-
-            if(userId){
-                savedMovie();
-            }else{
+    const savedMovie =useCallback(async () => {
+        setLoading(true);
+        try{
+            const result= await requestAPI(`/list/favourites/${userId}`, 'GET', null, token);
+            console.log("resultado películas vistas", result);
+            setMoviesSaved(result.movies ?? []);
+            setLoading(false);           
+            
+        }catch(error){                
+            console.log("error al cargar el historial", error);
+            Swal.fire("Error", "No se ha podido cargar el historial. Inténtalo más tarde.", "error");
             setLoading(false);
-            }
-            },[userId, token]);
+        }
+        },[userId, token]);
 
 
-            if(loading){
-                return <div className='loader'> Cargando tus pelis favoritas </div>
-            }
+        useEffect(() => { 
+         if(userId){
+            savedMovie();
+        }else{
+        setLoading(false);
+        }
+    },[userId, savedMovie]);
+  
+        if(loading){
+            return <div className='loader'> Cargando tus pelis favoritas </div>
+        }
 
     return (
         <div>
@@ -76,4 +77,4 @@ export const UserFavourite = () => {
             )}            
         </div>
     )
- }
+};

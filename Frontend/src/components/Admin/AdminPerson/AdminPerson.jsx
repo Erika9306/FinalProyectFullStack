@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Swal from 'sweetalert2';
 import { Button } from '../../Button/Button'; 
-import { requesAPI } from '../../../services/api';
+import { useApi } from '../../../services/api.jsx';
 import "./AdminPerson.css";
 
 export const AdminPerson = React.memo(() => {   
   const [admin, setAdmin] = useState([]); 
   const [editUser, setEditUser] = useState(null);
   const [editAdminForm, setEditAdminForm] = useState(false); 
-
+  const {requestAPI} = useApi();
   useEffect(() => {
     const listAdmins = async () => {
       try{
-        const data = await requesAPI('/user');     
+        const data = await requestAPI('/user');     
       const admins = data.filter(user => user.role === 'admin');
       setAdmin(admins);
       }catch(error){
@@ -21,7 +21,7 @@ export const AdminPerson = React.memo(() => {
       }
     };
     listAdmins();
-  }, []);
+  }, [requestAPI]);
   
   const retrieveUserInfo = useCallback((user) =>{        
     setEditUser(user);
@@ -32,7 +32,7 @@ export const AdminPerson = React.memo(() => {
     e.preventDefault();
     if(!editUser) return;
     try{
-      const response = await requesAPI(`/user/${editUser._id}`, 'PUT', editUser);             
+      const response = await requestAPI(`/user/${editUser._id}`, 'PUT', editUser);             
       setAdmin(previous =>
         {if(editUser.role !=='admin'){
           return previous.filter(u => u._id !== editUser._id);
@@ -45,7 +45,7 @@ export const AdminPerson = React.memo(() => {
       console.log("Error al editar los datos del administrador", error);
       Swal.fire("Error", "Error al editar los datos del administrador", "error", error);
     }
-  }, [editUser]);
+  }, [editUser,requestAPI]);
          
   const deleteUser = useCallback(async (user) => {
     try{
@@ -58,7 +58,7 @@ export const AdminPerson = React.memo(() => {
       });
       
       if (!result.isConfirmed) return;
-      const response = await requesAPI(`/user/${user._id}`, 'DELETE');
+      const response = await requestAPI(`/user/${user._id}`, 'DELETE');
       if(response.ok){        
         setAdmin(prev => prev.filter(u => u._id !== user._id));
         Swal.fire('Eliminado', `Administrador ${user.name} eliminado`, 'success');
@@ -67,7 +67,7 @@ export const AdminPerson = React.memo(() => {
       console.log("No se puede borrar", error);
       Swal.fire("Error", "No se pudo eliminar el administrador", "error");
     }
-  }, []);
+  }, [requestAPI]);
 
   return (
     <div className="admins-container">

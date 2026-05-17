@@ -3,12 +3,12 @@ import { useParams } from 'react-router-dom';
 import { UserFavourite } from '../UserFavourite/UserFavourite';
 import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
-import { requesAPI } from '../../../services/api.js';
+import { useApi } from '../../../services/api.jsx';      
 import './MovieDetail.css'
 
 
 export default function MovieDetail() {
-  
+  const {requestAPI} = useApi();
   const [movie, setMovie] = useState(null);
   const [selected, setSelected] = useState(false);
 
@@ -19,22 +19,22 @@ export default function MovieDetail() {
   useEffect(() => {
 
     const movieSelected = async()=>{
-      const result = await requesAPI(`/movies/${id}`);     
+      const result = await requestAPI(`/movies/${id}`);     
       setMovie(result);
     };
     movieSelected(id);
-    },[id]);
+    },[id, requestAPI]);
 
     
     const favouriteMovie = useCallback(async()=>{
       const token = localStorage.getItem('token');
     //sacamos usuario decodificando token y alli aparece _id
     const userId = jwtDecode(token)._id;
-    await requesAPI(`/list/add/${id}`, 'POST');    
+    await requestAPI(`/list/add/${id}`, 'POST');    
         setSelected(true);
         Swal.fire("¡Guardada!", "Película guardada en el historial", "success");   
 
-  },[id]);
+  },[id, requestAPI]);
 
     if(!movie){
       return <div >Cargando película...</div>;

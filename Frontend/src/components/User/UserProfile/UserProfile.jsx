@@ -4,31 +4,38 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom'; 
 import { Button } from '../../Button/Button';
 import { AuthContext } from "../../../context/AuthContext.jsx";
-import { requesAPI } from '../../../services/api.js';
+//hook personalizado para centralizar la lógica de las peticiones al backend, así evitamos repetir código en cada componente
+import { useApi } from '../../../services/api.jsx'; 
 import "./UserProfile.css";
 
 export const UserProfile = () => {
+    //para cambiar la foto de perfil usando formData,
+    const {requestAPI} = useApi();
+    const URL= "https://finalproyectfullstack.onrender.com";
     const [user, setUser] = useState(null);
     const [editAccount, setEditAccount] = useState(false);     
     const { register, handleSubmit, setValue, reset } = useForm();     
     const { token, userId } = useContext(AuthContext);
     const navigate = useNavigate();
-    useEffect(()=>{
-     
-        const userInfo = async () => {
-            try {                
-                const result = await requesAPI(`/user/${userId}`);
-                    setUser(result);
-                    //setvalue ayudará que al terminar fetch el usuario vea sus datos actuales que estan en el DB
-                    setValue('name', result.name);                     
-                
-            } catch (error) {
-                console.error("Error al obtener info", error);
-            }
-        };
-            userInfo();
-        }, [userId, token, setValue]);   
-        
+ 
+    const userInfo = useCallback(async () => {
+        try {                
+            const result = await requestAPI(`/user/${userId}`);
+                setUser(result);
+                //setvalue ayudará que al terminar fetch el usuario vea sus datos actuales que estan en el DB
+                setValue('name', result.name);                     
+            
+        } catch (error) {
+            console.error("Error al obtener info", error);
+        }
+    }, [userId, setValue]);
+
+    useEffect(() => {
+        if (userId) {       
+            userInfo();        
+        }
+    },[userId, userInfo]);
+    
 
         //cada vez que el usuario cambie, se actualizan los campos del formulario con los datos actuales del usuario
       
@@ -47,7 +54,7 @@ export const UserProfile = () => {
          }
     
         try {
-            const response = await fetch(`${URL}/user/${userId}`, {
+            const response = await fetch(`${URL}/api/v1/user/${userId}`, {
                 method: "PUT",
                 headers: {
                     "Authorization": `Bearer ${token}`,
@@ -86,7 +93,7 @@ export const UserProfile = () => {
 
         if (result.isConfirmed) {
             try {
-                const response = await requesAPI(`/user/${userId}`, 'DELETE');
+                const response = await requestAPI(`/user/${userId}`, 'DELETE');
                 if (response.ok) {
                     localStorage.removeItem('token');
                     localStorage.clear();
@@ -97,11 +104,11 @@ export const UserProfile = () => {
                 console.log("Error al borrar", error);
             }
         }
-    },[ userId, navigate]);
+    },[ userId, navigate, requestAPI]);
 
-    if(!user){
-        return <div> Cargando datos...</div>
-    }
+        if(!user){
+            return <div> Cargando datos...</div>
+        }
     
     return (
         <div className="profile-container" >
@@ -152,6 +159,3 @@ export const UserProfile = () => {
         </div>
     );
 };
-
-
-

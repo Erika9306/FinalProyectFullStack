@@ -7,7 +7,7 @@ const userSchema = new Schema({
     email: {type: String, required: true, unique: true, maxLength: 30, trim: true},
     password: {type: String, required: true, minLength:[3, "Password must have at least 3 characters"], maxLength: 100, trim: true},
     role: {type: String, enum:['admin', 'user'], default: 'user'},
-    img: {type: String, default: 'https://us.123rf.com/450wm/get4net/get4net1902/get4net190209043/125446708-anonymous-faceless-user.jpg'},
+    img: {type: String, default: 'https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small/profile-icon-design-free-vector.jpg'},
     movies: [{type: mongoose.Types.ObjectId, ref: 'Movie'}],
           
     },

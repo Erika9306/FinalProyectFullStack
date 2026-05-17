@@ -4,10 +4,11 @@ import { useForm } from "react-hook-form";
 import {jwtDecode} from "jwt-decode";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthContext.jsx";
-import { requesAPI } from '../../services/api.js';
+import { useApi } from '../../services/api.jsx'; 
 import "./Login.css";
 
 export default function Login() {
+  const {requestAPI} = useApi();
   const {login} = useContext(AuthContext); 
   const navigate = useNavigate();
   const {
@@ -22,7 +23,7 @@ export default function Login() {
     try {
 
       //mandamos petición al backend mandando la info de usuario
-      const result = await requesAPI('/user/login', 'POST', data);
+      const result = await requestAPI('/user/login', 'POST', data);
       console.log("Respuesta Login:", result);
      
       const decoded = jwtDecode(result.token);

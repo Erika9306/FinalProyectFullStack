@@ -1,13 +1,19 @@
+import React, { useContext} from 'react';
+import { AuthContext } from '../context/AuthContext.jsx';
 
 const URL= "https://finalproyectfullstack.onrender.com/api/v1";
 
-export const requesAPI = async (endpoint, method = 'GET', body = null) => {
+export const useApi = () => {
+  const { token} = useContext(AuthContext);
+
+  const requestAPI = async (endpoint, method = 'GET', body = null) => {
+  
  //options para la petición fetch para que pueda enviar el token y el body si es necesario
     const options = {
     method,
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${localStorage.getItem("token")}`
+      "Authorization": `Bearer ${token || localStorage.getItem("token")}`
     }
   };
 
@@ -15,8 +21,10 @@ export const requesAPI = async (endpoint, method = 'GET', body = null) => {
 
   const response = await fetch(`${URL}${endpoint}`, options);
   if (!response.ok){
-     throw new Error("Error en la petición");
+     throw new Error("Error en la petición requestAPI: " + response);
     }
   
   return await response.json();
+};
+return { requestAPI }
 };

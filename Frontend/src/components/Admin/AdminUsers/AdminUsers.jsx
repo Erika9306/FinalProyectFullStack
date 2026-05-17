@@ -3,26 +3,40 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import "./AdminUsers.css";
 import{ Button } from '../../Button/Button';
-import { requesAPI } from '../../../services/api.js';
+import { useApi } from '../../../services/api.jsx'; 
 
 
 
 //usamos React.memo para memorizar el componente y evitar renders innecesarios
 export const AdminUsers = React.memo(() => {  
+  const {requestAPI} = useApi();
   const [users, setUsers] = useState([]);
   const [addUserForm, setAddUserForm] = useState (false);
   const [editUserForm, setEditUserForm]= useState(false);
   const [editUser, setEditUser] = useState(null); 
-  const [searchUser, setSearchUser] = useState('');  
+  const [searchUser, setSearchUser] = useState(''); 
   
-  useEffect(() => {
-    const listUsers = async () => {
-      const data = await requesAPI('/user');    
+  
+  
+      const listUsers = useCallback(async () => {
+      try{
+      const data = await requestAPI('/user', 'GET');    
       setUsers(data || []);
-    };
+      }catch(error){
+        console.error("Error al cargar usuarios:", error);
+        Swal.fire("Error en el servidor. Inténtalo de nuevo más tarde.");
+        return;
+      }
+      //  al incluir requestAPI dentro del dependencias, me ha creado un bucle infinito, por eso las dejare vacías
+      //saco la funcion fuera del useEffect y solo al mismo le paso la función listUsers
+    },[]);
 
+
+  //solo para cargar la lista de usuarios una vez
+  useEffect(() => {
     listUsers();
-  }, []);
+}, [listUsers]);
+
 
   const {register,
     handleSubmit,
@@ -33,7 +47,7 @@ export const AdminUsers = React.memo(() => {
   const createUser = useCallback(async (data) =>{
     try{
       setSearchUser('');
-      const response = await requesAPI('/user/register', 'POST', data);      
+      const response = await requestAPI('/user/register', 'POST', data);      
       //añadir el nuevo usuario a la lista
       setUsers(prev => [...prev, response]);
 
@@ -45,7 +59,7 @@ export const AdminUsers = React.memo(() => {
       Swal.fire("Error en el servidor. Inténtalo de nuevo más tarde.");
       return;
     }
-  },[reset]);
+  },[reset, requestAPI ]);
 
  
   //  EDITAR 
@@ -62,7 +76,7 @@ export const AdminUsers = React.memo(() => {
     setSearchUser('');
     if(!editUser) return;
     try{
-        const updatedUser = await requesAPI(`/user/${editUser._id}`, 'PUT', editUser);             
+        const updatedUser = await requestAPI(`/user/${editUser._id}`, 'PUT', editUser);             
         setUsers(previous => previous.map(u => u._id === editUser._id? updatedUser: u));
         setEditUserForm(false);        
          Swal.fire("Exito!", `Usuario ${editUser.name} actualizado correctamente`, "success");
@@ -73,7 +87,7 @@ export const AdminUsers = React.memo(() => {
       return;
     }
   },
-    [editUser]);
+    [editUser, requestAPI]);
        
 
   //  BORRAR
@@ -90,15 +104,15 @@ export const AdminUsers = React.memo(() => {
       confirmButtonColor: '#f33a19',
     });
     if (!result.isConfirmed) return;
-     await requesAPI(`/user/${user._id}`, 'DELETE');    
+     await requestAPI(`/user/${user._id}`, 'DELETE');    
       //filtramos para que los que NO tienen el mismo id se queden sin borrar
       setUsers(prev=> prev.filter(u=> u._id !== user._id));
        Swal.fire({
-  title: "Eliminado",
-  text: "Usuario eliminado correctamente",
-  icon: "success",
-  confirmButtonText: "OK"
-});
+        title: "Eliminado",
+        text: "Usuario eliminado correctamente",
+        icon: "success",
+        confirmButtonText: "OK"
+      });
     
 }catch(error){
   console.log("No se puede borrar el usuario", error);
@@ -109,14 +123,14 @@ export const AdminUsers = React.memo(() => {
   });
 }
 
-  }, []);
+  }, [requestAPI]);
 
 
   // DETALLE
 
   const detailsUser = useCallback(async(user) => {   
     setSearchUser('');
-    const result = await requesAPI(`/list/favourites/${user._id}`);
+    const result = await requestAPI(`/list/favourites/${user._id}`);
     
     let moviesData = result.movies || [];
     //listmovie se guardará las pelicuasl vistoas pro el usuario
@@ -148,20 +162,20 @@ export const AdminUsers = React.memo(() => {
     confirmButtonText: 'Cerrar',
     confirmButtonColor: '#f33a19',
   });
-},[]);
+},[requestAPI]);
 
-//use memeo guardara la lista de búsqueda y es SINCRONO(sin async)
+//useMemo guardara la lista de búsqueda y es SINCRONO(sin async)
 const search = useMemo(()=>{
   const inputUser = searchUser.toLowerCase().trim();
   if(!inputUser){
     return [];
   }
-  console.log('Buscando usuario', inputUser,searchUser);
-  return users.filter(u=> u?.name?.toLowerCase().trim().includes(inputUser));
+  console.log('Buscando usuario', inputUser);
+  return users.filter(u=> u?.name.toLowerCase().trim().includes(inputUser));
   
 },[ users, searchUser]);  
-//search, usamos ya la info que sacamso de Db
-//const search = users.filter(user => user.name.toLowerCase());
+
+
 
   return (
     <div className='users-table'>
@@ -178,33 +192,33 @@ const search = useMemo(()=>{
         onBlur = {() => {
             setTimeout(() => {
               setSearchUser('');
-            }, 200);
+            }, 400);
           }}
         />
-     {searchUser !== '' && (
-    <div className='search-result-div'>
-      {search.length === 0 ? (
-        <p>No se encontró ningún usuario "{searchUser}"</p>
-      ) : (
-        <div className="results-list">
-              {search.map(s => (
-                
-                <div key={s._id} className="search-item-row">
-                  <p className="search-item"> {s.name}</p>
-                  <Button
-                  text={'Detalle'}
-                   onClick={() => detailsUser(s)}
-                   className={'button-primary'}
-                   />
-                  <Button 
-                  text={'Editar'} 
-                  onClick={() => retrieveUserInfo(s)} 
-                  className={'button-secondary'}
-                  />
-                  <Button text={'Borrar'}
-                   onClick={() => deleteUser(s)} 
-                   className={'button-danger'} />
-                </div>
+        {searchUser.trim() !== '' && (
+        <div className='search-result-div-users'>
+        {search.length === 0 ? (
+          <p>No se encontró ningún usuario "{searchUser}"</p>
+        ) : (
+          <div className="results-list">
+            {search.map(s => (
+              
+              <div key={s._id} className="search-item-row">
+                <p className="search-item"> {s.name}</p>
+                <Button
+                text={'Detalle'}
+                onClick={() => detailsUser(s)}
+                className={'button-primary'}
+                />
+                <Button 
+                text={'Editar'} 
+                onClick={() => retrieveUserInfo(s)} 
+                className={'button-secondary'}
+                />
+                <Button text={'Borrar'}
+                onClick={() => deleteUser(s)} 
+                className={'button-danger'} />
+              </div>
           ))}
         </div>
       )}

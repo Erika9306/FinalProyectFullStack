@@ -36,7 +36,7 @@ const postUser = async (req, res,next) => {
             password: req.body.password,
             role: req.body.role,  
             //foto por defecto, luego en su perfil puede cambiarla
-            img: 'https://us.123rf.com/450wm/get4net/get4net1902/get4net190209043/125446708-anonymous-faceless-user.jpg',          
+            img: 'https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small/profile-icon-design-free-vector.jpg',          
             movies: req.body.movies            
         });
                 

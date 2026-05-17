@@ -4,11 +4,12 @@ import {  useForm } from "react-hook-form";
 import {jwtDecode} from "jwt-decode";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthContext.jsx";
-import { requesAPI } from '../../services/api.js';
+import { useApi } from '../../services/api.jsx'; 
 import "./Register.css";
 
 
 export default function Register() {
+  const {requestAPI} = useApi();
   const {login} = useContext(AuthContext);  
   const navigate = useNavigate();
   //React Form Hook
@@ -20,10 +21,11 @@ export default function Register() {
   const onRegister = async (data)=>{
     try {
       
-      const response = await requesAPI('/user/register', 'POST',{
+      const response = await requestAPI('/user/register', 'POST',{
         name: data.name,
         email: data.email,
         password: data.password
+
        });      
      
       if(response.ok){

@@ -15,8 +15,7 @@ h4{
 input.search-movie {
   position: relative;
   width: 60%;
-  margin-bottom: 2rem;
-  
+  margin-bottom: 2rem;  
   color: var(--text-text-color);
 }
 
@@ -35,12 +34,12 @@ input.search-movie {
 
 }
 
-/*resultado busuqeda mmovies*/
+/*resultado busqueda mmovies*/
 .search-result-div {
   position: absolute;
   top: 100%; 
   left:0;
-  width: 100%;
+  width: 80%;
   align-items: center;
   justify-content:space-between;
   gap:1rem;

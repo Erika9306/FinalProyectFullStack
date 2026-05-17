@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext} from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext.jsx";
-import { requesAPI } from '../../../services/api.js';
+import { useApi } from '../../../services/api.jsx'; 
 import "./AdminHome.css";
 
 export default function AdminHome() {
@@ -9,7 +9,7 @@ export default function AdminHome() {
   const [users, setUsers] = useState([]);
   const [movies, setMovies] = useState([]);
   const { token, logout } = useContext(AuthContext); 
-
+  const {requestAPI} = useApi();
   useEffect(() => {
     const fetchData = async () => {
       
@@ -20,8 +20,8 @@ export default function AdminHome() {
 
       try {
         const [userData, movieData] = await Promise.all([
-          requesAPI('/user'),
-          requesAPI('/movies')
+          requestAPI('/user'),
+          requestAPI('/movies')
         ]);
         
         setUsers(userData?? []);
@@ -33,7 +33,7 @@ export default function AdminHome() {
     };
 
     fetchData();
-  }, [token, logout]);
+  }, [token, logout, requestAPI]);
 
     return (
     <div className="admin-container">
